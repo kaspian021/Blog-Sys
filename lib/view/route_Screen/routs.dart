@@ -21,11 +21,7 @@ class Routs {
       page: () => const SelectRegister(),
       binding: BindLoginScreen(),
     ),
-    GetPage(
-      name: RoutsName.routeLoginScreen,
-      page: () => const SelectRegister(),
-      binding: BindLoginScreen(),
-    ),
+    
     GetPage(
       name: RoutsName.routeSplashScreen,
       page: () => const SplashScreen(),

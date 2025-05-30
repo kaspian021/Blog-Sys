@@ -23,8 +23,7 @@ class _SelectRegisterState extends State<SelectRegister>
   RxBool signUpSelect = false.obs;
 
   //Controller_Register
-  var loginController = Get.put(LoginController());
-  var signUpController= Get.put(RegisterController());
+  
   //dividerAniamtion
   late AnimationController controller;
   late Animation<Offset> animationDivider;

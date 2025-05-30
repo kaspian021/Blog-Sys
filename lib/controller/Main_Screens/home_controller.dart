@@ -18,7 +18,7 @@ class HomeController extends GetxController {
   
   RxList<ModelHomeNewArticles> listArticlesNews= RxList();
 
-  late Iterable<ModelHomeNewArticles> listArticlesTopVisited;
+  Iterable<ModelHomeNewArticles> listArticlesTopVisited=Iterable.empty();
 
   @override
   void onInit() {
@@ -40,13 +40,13 @@ class HomeController extends GetxController {
         log(listArticlesNews[0].image!);
       }
       listArticlesTopVisited= listArticlesNews.where((hop)=> hop.view! >= 2000).toList();
-      
+      isloading.value= false;
     }
     } on DioException catch (e) {
       log('Error: ${e.error}');
-      
+      Get.snackbar('Error', 'connection Lost');
     }
-    isloading.value= false;
+    
   }
 
 

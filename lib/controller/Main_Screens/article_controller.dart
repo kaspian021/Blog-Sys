@@ -28,8 +28,9 @@ class ArticleController extends GetxController {
       if (response.statusCode == 200) {
         contentArticleSingle.value= ModelArticlesSingle.fromJson(response.data);
         log('ok article Content');
+        isloading.value = false;
       }
-      isloading.value = false;
+      
     } catch (e) {
       Get.snackbar('Error', 'connection Lost');
       log('error: $e');
