@@ -57,6 +57,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/graphic.png
   AssetGenImage get graphic => const AssetGenImage('assets/images/graphic.png');
 
+  /// File path: assets/images/imageDefaultArticle.png
+  AssetGenImage get imageDefaultArticle =>
+      const AssetGenImage('assets/images/imageDefaultArticle.png');
+
   /// File path: assets/images/laptop.png
   AssetGenImage get laptop => const AssetGenImage('assets/images/laptop.png');
 
@@ -72,6 +76,7 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
     cpu,
     graphic,
+    imageDefaultArticle,
     laptop,
     logoBlog,
     motherBoard,

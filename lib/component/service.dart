@@ -1,4 +1,8 @@
+import 'package:blog_system_app/controller/Main_Screens/Articles/article_write_controller.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:get/get.dart';
+
 
 class SaveToken {
   SaveToken._();
@@ -19,6 +23,24 @@ class ServiceApi {
         ).then((respons) {
           return respons;
         });
+  }
+  
+}
+
+class SelectFile{
+
+  var controller= Get.put(ArticleWriteController());
+  selectImageFile()async{
+
+    FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+
+    if(result!=null){
+      controller.fileImage= result.files.first;
+      controller.selectImage.value=true;
+    }else{
+      controller.selectImage.value= false;
+    }
+
   }
   
 }

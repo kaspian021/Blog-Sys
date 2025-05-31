@@ -18,7 +18,7 @@ class HomeController extends GetxController {
   
   RxList<ModelHomeNewArticles> listArticlesNews= RxList();
 
-  Iterable<ModelHomeNewArticles> listArticlesTopVisited=Iterable.empty();
+  Iterable<ModelHomeNewArticles> listArticlesTopVisited=const Iterable.empty();
 
   @override
   void onInit() {

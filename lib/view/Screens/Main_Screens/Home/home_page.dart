@@ -2,7 +2,7 @@
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/service.dart';
 import 'package:blog_system_app/component/temps.dart';
-import 'package:blog_system_app/controller/Main_Screens/article_controller.dart';
+import 'package:blog_system_app/controller/Main_Screens/Articles/article_controller.dart';
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
 import 'package:blog_system_app/controller/Register/check_login_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';

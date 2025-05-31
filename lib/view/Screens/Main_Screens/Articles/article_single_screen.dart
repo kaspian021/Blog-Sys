@@ -1,7 +1,7 @@
 
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/temps.dart';
-import 'package:blog_system_app/controller/Main_Screens/article_controller.dart';
+import 'package:blog_system_app/controller/Main_Screens/Articles/article_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:blog_system_app/model/model_home_new_articles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,6 +12,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 class ArticleSingleScreen extends StatelessWidget {
+
+  
   late final ModelHomeNewArticles modelHomeNewArticles;
   final controller = Get.find<ArticleController>();
 

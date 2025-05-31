@@ -3,6 +3,7 @@ import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
 import 'package:blog_system_app/controller/Register/check_login_controller.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_screen.dart';
+import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_write_screen.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Home/drawer_widget.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Home/home_page.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class MainPages extends StatelessWidget {
                 textstyle: textstyle,
               ),
               ArticleScreen(),
+              const ArticleWriteScreen()
             ],
           ),
         ),
@@ -119,7 +121,7 @@ class BottomNavigationBlogSys extends StatelessWidget {
                     //if user islogin==true and isSeller => to write ArticleScreen
 
                     if (loginController.isLogin.value && controller.isSeller.value) {
-                      //to Write ArticleScreen
+                      controller.colorIcon.value=2;
                     } else {
                       //to details permissionsScreen
                       Get.snackbar(
@@ -130,6 +132,7 @@ class BottomNavigationBlogSys extends StatelessWidget {
                           onPressed: () {
 
                             //permissionsScreen
+                            
                           },
                           child: const Text('see more details'),
                         ),
@@ -148,20 +151,21 @@ class BottomNavigationBlogSys extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    controller.colorIcon.value = 2;
+                    controller.colorIcon.value = 3;
                   },
                   icon: Icon(
                     Icons.search_rounded,
                     size: 30,
                     color:
-                        controller.colorIcon.value == 2
+                        controller.colorIcon.value == 3
                             ? Colors.blue
                             : Colors.black,
                   ),
                 ),
                 IconButton(
                   onPressed: () {
-                    _keyGlobal.currentState!.openDrawer();
+                    
+                    _keyGlobal.currentState!.openEndDrawer();
                   },
                   icon: const Icon(Icons.menu, size: 30, color: Colors.black),
                 ),

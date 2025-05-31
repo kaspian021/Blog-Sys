@@ -2,6 +2,7 @@
 import 'package:blog_system_app/controller/bindings.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_screen.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_single_screen.dart';
+import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_write_screen.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/main_pages.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/profile_screen.dart';
 import 'package:blog_system_app/view/Screens/StartScreens/splash_screen.dart';
@@ -37,6 +38,8 @@ class Routs {
       page: () =>  ProfileScreen(),
       binding: BindProfileScreen(),
     ),
+
+  //Articles
     GetPage(
       name: RoutsName.routeArticlesList,
       page: () =>  ArticleScreen(),
@@ -45,6 +48,11 @@ class Routs {
     GetPage(
       name: RoutsName.routeArticlesSingle,
       page: () =>  ArticleSingleScreen(),
+      binding: BindArticleScreen(),
+    ),
+    GetPage(
+      name: RoutsName.routeArticlesWrite,
+      page: () =>  const ArticleWriteScreen(),
       binding: BindArticleScreen(),
     ),
   ];

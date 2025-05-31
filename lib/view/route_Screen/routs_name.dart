@@ -9,6 +9,7 @@ class RoutsName {
   static const routeSplashScreen= '/SplashScreen';
   static const routeArticlesList= '/ArticlesList';
   static const routeArticlesSingle= '/ArticlesSingle';
+  static const routeArticlesWrite= '/ArticlesWrite';
 
 
 }

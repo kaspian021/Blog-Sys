@@ -1,6 +1,4 @@
 
-import 'package:blog_system_app/controller/Register/login_controller.dart';
-import 'package:blog_system_app/controller/Register/register_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:blog_system_app/view/Screens/register&Login/login_screen.dart';
 import 'package:blog_system_app/view/Screens/register&Login/register_screen.dart';

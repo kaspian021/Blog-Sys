@@ -15,14 +15,19 @@ class ColorsConst {
   ];
 
   static const colorPrimery = Color.fromARGB(255, 55, 106, 237);
+  static const colorDivider = Color.fromARGB(97, 123, 139, 178);
 }
 
 class FontSized {
   FontSized._();
 
-  static TextStyle fontMediumLarg = GoogleFonts.abel(
+  static TextStyle fontLarg = GoogleFonts.abel(
     color: Colors.black,
     fontSize: 22,
+  );
+  static TextStyle fontMediumLarg = GoogleFonts.abel(
+    color: Colors.black,
+    fontSize: 20,
   );
   static TextStyle fontMedium = GoogleFonts.abel(
     color: Colors.black,
@@ -42,6 +47,14 @@ class FontSized {
   );
 }
 
+class ConstText {
+  ConstText._();
+
+  static const concetArticleWrite =
+      'Write the best article and share everything you know about the computer world. Always remember that this article is the beginning of the path for many (:';
+}
+
+//theme_Project
 ThemeData dataTheme() {
   return ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
