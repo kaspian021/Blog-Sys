@@ -1,8 +1,12 @@
-
+import 'package:blog_system_app/component/extension_app.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
+import 'package:blog_system_app/model/model_list_content_onbording.dart';
 import 'package:blog_system_app/view/Screens/StartScreens/onbordingScreen/onbording_pages.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -13,64 +17,158 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
-  
+  int currentPage = 0;
+
+  final List<ModelListContentOnbording> contentListOnbording = [
+    ModelListContentOnbording(
+      title: "🧠 Unlock the World of PC Hardware!",
+      description:
+          "Discover the newest Motherboards, CPUs, and Graphics Cards hitting the market. Deep dives and breaking news, all in one place. 💻",
+    ),
+    ModelListContentOnbording(
+      title: "Stay Ahead with Core Hardware News!",
+      description:
+          "Your single source for the freshest updates on Motherboards, Processors, and Graphics Cards. Don't miss the next big thing! ✨",
+    ),
+    ModelListContentOnbording(
+      title: "Stay Ahead with Core Hardware News!",
+      description:
+          "Your single source for the freshest updates on Motherboards, Processors, and Graphics Cards. Don't miss the next big thing! ✨",
+    ),
+  ];
 
   final List<Widget> _onboardingPages = [
     // Add your onboarding page widgets here
     OnboardingPage(
-      title: "🧠 Unlock the World of PC Hardware!",
-      description:
-          "Discover the newest Motherboards, CPUs, and Graphics Cards hitting the market. Deep dives and breaking news, all in one place. 💻",
       imageAsset: [
         Assets.images.cpu.path,
         Assets.images.graphic.path,
         Assets.images.motherBoard.path,
         Assets.images.laptop.path,
       ],
-      currentPage: 0
     ),
     OnboardingPage(
-      title: "Stay Ahead with Core Hardware News!",
-      description:
-          "Your single source for the freshest updates on Motherboards, Processors, and Graphics Cards. Don't miss the next big thing! ✨",
       imageAsset: [
         Assets.images.cpu.path,
         Assets.images.graphic.path,
         Assets.images.motherBoard.path,
         Assets.images.laptop.path,
-      ], currentPage: 1,
+      ],
     ),
     OnboardingPage(
-      title: "Stay Ahead with Core Hardware News!",
-      description:
-          "Your single source for the freshest updates on Motherboards, Processors, and Graphics Cards. Don't miss the next big thing! ✨",
       imageAsset: [
         Assets.images.cpu.path,
         Assets.images.graphic.path,
         Assets.images.motherBoard.path,
         Assets.images.laptop.path,
-      ], currentPage: 2,
+      ],
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final TextTheme textstyle = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 244, 247, 255),
 
-        body: PageView(
-
-          controller: _pageController,
-          padEnds: true,
-          scrollDirection: Axis.horizontal,
-          reverse: false,
-          physics: const AlwaysScrollableScrollPhysics(),
-          children: _onboardingPages,
+        body: Column(
+          children: [
+            SizedBox(
+              height: size.height / 1.6,
+              child: PageView(
+                onPageChanged: (value) {
+                  setState(() {
+                    currentPage = value;
+                  });
+                },
+                controller: _pageController,
+                padEnds: true,
+                scrollDirection: Axis.horizontal,
+                reverse: false,
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: _onboardingPages,
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: Get.height / 2.9,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                    child: Column(
+                      children: [
+                        Text(
+                          contentListOnbording[currentPage].title!,
+                          style: textstyle.bodyLarge,
+                        ),
+                        ValueSizes.high.height,
+                        Text(
+                          contentListOnbording[currentPage].description!,
+                          style: textstyle.bodySmall,
+                        ),
+                        ValueSizes.ultry.height,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            DotsIndicator(
+                              dotsCount: 3,
+                              position: currentPage.toDouble(),
+                              decorator: DotsDecorator(
+                                size: const Size.square(7.0),
+                                activeSize: const Size(18.0, 9.0),
+                                activeShape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                              ),
+                            ),
+                            ValueSizes.verylow.height,
+                            GestureDetector(
+                              onTap: () {
+                                Get.offAndToNamed(RoutsName.routeHomeScreen);
+                              },
+                              child: Container(
+                                height: 45,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 1, 45, 189),
+                                  borderRadius: BorderRadius.circular(10),
+                                  shape: BoxShape.rectangle,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text('Start', style: textstyle.bodyMedium),
+                                    const Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
-
-

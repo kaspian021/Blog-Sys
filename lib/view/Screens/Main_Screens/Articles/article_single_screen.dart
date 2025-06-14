@@ -106,7 +106,7 @@ class ArticleSingleScreen extends StatelessWidget {
                               ),
                             ),
 
-                            ValueSizes.high.height,
+                            ValueSizes.high.width,
 
                             //userName author and date write Article
                             Column(
@@ -116,7 +116,7 @@ class ArticleSingleScreen extends StatelessWidget {
                                   modelHomeNewArticles.author!,
                                   style: FontSized.fontLow,
                                 ), //userName author test,
-                                const SizedBox(height: 3),
+                                const SizedBox(height: 4),
                                 Text(
                                   modelHomeNewArticles.createdAt ?? 'null',
                                   style: FontSized.fontVeryLow,
@@ -183,7 +183,7 @@ class ArticleSingleScreen extends StatelessWidget {
                   //Article_content
                   Obx(
                     () =>
-                        controller.contentArticleSingle.value.content != null
+                        !controller.isloading.value
                             ? Padding(
                               padding: EdgeInsets.only(
                                 left: sizeBody,

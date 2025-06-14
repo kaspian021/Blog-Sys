@@ -24,6 +24,7 @@ class ArticleScreen extends StatelessWidget {
       child: Scaffold(
         
         body: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
               Align(
@@ -36,7 +37,7 @@ class ArticleScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              ValueSizes.high.height,
+              ValueSizes.veryhigh.height,
               SizedBox(
                 height: Get.height/1.25,
           
@@ -134,7 +135,7 @@ class ArticleScreen extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 100,)
+              (ValueSizes.ultry * 2).height
             ],
           ),
         ),

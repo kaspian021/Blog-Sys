@@ -1,5 +1,4 @@
 import 'package:blog_system_app/component/extension_app.dart';
-import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/component/widget_custom.dart';
 import 'package:blog_system_app/controller/Animation_controller/registerAnimation/signup_animation_screen.dart';
