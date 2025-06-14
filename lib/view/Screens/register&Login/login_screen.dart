@@ -1,4 +1,6 @@
 
+import 'package:blog_system_app/component/extension_app.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Animation_controller/registerAnimation/login_animation_screen.dart';
 import 'package:blog_system_app/controller/Register/login_controller.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen>
                           style: widget.textStyle.bodyLarge,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      ValueSizes.low.height,
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -78,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen>
                           style: widget.textStyle.bodySmall,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      (ValueSizes.high+1).height,
                       //Email
                       TextField(
                         onChanged: (value) {
@@ -106,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen>
                           hintFadeDuration: const Duration(seconds: 1),
                         ),
                       ),
-                      const SizedBox(height: 35),
+                      (ValueSizes.veryhigh+15).height,
                       //password
                       TextField(
                         onChanged: (value) {
@@ -150,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen>
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      (ValueSizes.veryhigh+10).height,
                       ElevatedButton(
                         onPressed: () {
                           if (controller.isEmailOk.value) {
@@ -160,17 +162,12 @@ class _LoginScreenState extends State<LoginScreen>
                             Get.snackbar('Error', 'email nothing');
                           }
                         },
-                        style: ButtonStyle(
-                          fixedSize: WidgetStatePropertyAll(
-                            Size(Get.width / 1.2, Get.height / 13.53),
-                          ),
-                        ),
                         child: Text(
                           'LOGIN',
                           style: widget.textStyle.titleLarge,
                         ),
                       ),
-                      const SizedBox(height: 40),
+                      (ValueSizes.veryhigh+20).height,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -181,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   style: widget.textStyle.titleMedium,),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      ValueSizes.veryhigh.height,
                       const Text('Or sign in with'),
                     ],
                   ),

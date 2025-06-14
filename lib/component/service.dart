@@ -26,11 +26,11 @@ class ServiceApi {
   }
   
 }
-
+//selctFile for App
 class SelectFile{
 
   var controller= Get.put(ArticleWriteController());
-  selectImageFile()async{
+  selectImageFile(FileType typeFile)async{
 
     FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
 

@@ -7,7 +7,7 @@ import 'package:blog_system_app/view/Screens/Main_Screens/main_pages.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/profile_screen.dart';
 import 'package:blog_system_app/view/Screens/StartScreens/splash_screen.dart';
 import 'package:blog_system_app/view/Screens/register&Login/select_register.dart';
-import 'package:blog_system_app/view/route_Screen/routs_name.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:get/get.dart';
 
 //Screens_for_simple_binding

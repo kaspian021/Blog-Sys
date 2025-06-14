@@ -1,5 +1,7 @@
 
+import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/temps.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
 import 'package:blog_system_app/controller/Register/check_login_controller.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_screen.dart';
@@ -8,12 +10,12 @@ import 'package:blog_system_app/view/Screens/Main_Screens/Home/drawer_widget.dar
 import 'package:blog_system_app/view/Screens/Main_Screens/Home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 class MainPages extends StatelessWidget {
   MainPages({super.key});
 
-  final box = GetStorage();
+  
 
   final logincontroller = Get.find<CheckLoginController>();
   final controller = Get.find<HomeController>();
@@ -26,11 +28,11 @@ class MainPages extends StatelessWidget {
     var sizeBody = MediaQuery.of(context).size.width / 12;
     return SafeArea(
       child: Scaffold(
-        drawerEdgeDragWidth: 20,
+        drawerEdgeDragWidth: ValueSizes.veryhigh,
         key: _keyGlobal,
         drawerEnableOpenDragGesture: false,
         endDrawerEnableOpenDragGesture: true,
-        backgroundColor: Colors.white,
+        
         drawerScrimColor: Colors.black,
         //Drawer programm
         endDrawer: DrawerBlogSys(textstyle: textstyle),
@@ -50,7 +52,7 @@ class MainPages extends StatelessWidget {
               HomePage(
                 sizeBody: sizeBody,
                 controller: controller,
-                box: box,
+                box: WidgetsAndVariableStatic.box,
                 textstyle: textstyle,
               ),
               ArticleScreen(),
@@ -83,7 +85,7 @@ class BottomNavigationBlogSys extends StatelessWidget {
         height: Get.height / 9.90,
         decoration: const BoxDecoration(
           color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.black, blurRadius: 10.0)],
+          boxShadow: [BoxShadow(color: Colors.black, blurRadius: ValueSizes.medium)],
         ),
         child: Column(
           children: [
@@ -140,8 +142,8 @@ class BottomNavigationBlogSys extends StatelessWidget {
                     }
                   },
                   child: Container(
-                    height: Get.height / 15,
-                    width: Get.height / 15,
+                    height: Get.height / ValueSizes.high,
+                    width: Get.height / ValueSizes.high,
                     decoration: BoxDecoration(
                       color: controller.isSeller.value? ColorsConst.colorPrimery: Colors.blueGrey,
                       borderRadius: BorderRadius.circular(100),

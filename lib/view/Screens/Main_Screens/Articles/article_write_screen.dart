@@ -1,9 +1,12 @@
 import 'dart:io';
+import 'package:blog_system_app/component/extension_app.dart';
 import 'package:blog_system_app/component/service.dart';
 import 'package:blog_system_app/component/temps.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Main_Screens/Articles/article_write_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:blog_system_app/model/tags_add.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +26,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final sizeBody = MediaQuery.of(context).size.width / 10;
+    final sizeBody = MediaQuery.of(context).size.width / ValueSizes.medium;
 
     return SafeArea(
       child: Scaffold(
@@ -37,7 +40,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
                 padding: EdgeInsets.only(
                   left: sizeBody,
                   right: sizeBody,
-                  top: 10,
+                  top: ValueSizes.medium,
                 ),
                 child: Row(
                   children: [
@@ -53,7 +56,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 10),
+              ValueSizes.medium.height,
               //subject Article
               Padding(
                 padding: EdgeInsets.only(left: sizeBody, right: sizeBody),
@@ -65,7 +68,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+              40.0.height,
           
               //image in Article Write with filePicker
               SelectImageContainer(controller: controller),
@@ -73,9 +76,9 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
               //Article write Content to Screen Write
               Padding(
                 padding: EdgeInsets.only(
-                  left: sizeBody - 10,
-                  right: sizeBody - 10,
-                  top: 20,
+                  left: sizeBody - ValueSizes.medium,
+                  right: sizeBody - ValueSizes.medium,
+                  top: ValueSizes.veryhigh,
                 ),
                 child: TextButton(
                   onPressed: () {
@@ -92,7 +95,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
                             color: ColorsConst.colorPrimery,
                             size: 25,
                           ),
-                          const SizedBox(width: 30,)
+                          30.0.width,
                           
                         
                       ],
@@ -102,22 +105,22 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
               ),
           
               const Divider(color: ColorsConst.colorDivider, thickness: 3,indent: 40,endIndent:40,height: 0,),
-              const SizedBox(height: 10),
+              ValueSizes.medium.height,
               Padding(
                 padding: EdgeInsets.only(
                   left: sizeBody,
-                  right: sizeBody - 10,
+                  right: sizeBody - ValueSizes.medium,
                   
                 ),
                 child: Text(ConstText.concetArticleWrite,style: FontSized.fontLow,),
               ),
-              const SizedBox(height: 10),
+              ValueSizes.medium.height,
               //open bottomSheet for select tags
               Padding(
                 padding: EdgeInsets.only(
-                  left: sizeBody - 10,
-                  right: sizeBody - 10,
-                  top: 10,
+                  left: sizeBody - ValueSizes.medium,
+                  right: sizeBody - ValueSizes.medium,
+                  top: ValueSizes.medium,
                 ),
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -150,13 +153,13 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
                 ),
               ),
               const Divider(color: ColorsConst.colorDivider, thickness: 3,indent: 40,endIndent:40,height: 0,),
-              const SizedBox(height: 10),
+              ValueSizes.medium.height,
               
               //tag_ Article
               Padding(
                 padding: EdgeInsets.only(
-                  left: sizeBody - 10,
-                  right: sizeBody - 10,
+                  left: sizeBody - ValueSizes.medium,
+                  right: sizeBody - ValueSizes.medium,
                   top: 5,
                 ),
                 child: SizedBox(
@@ -186,7 +189,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
 
   Widget listTagsArticle(int index) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30, left: 10),
+      padding: const EdgeInsets.only(bottom: 30, left: ValueSizes.medium),
       child: Container(
         height: Get.height / 5,
 
@@ -197,7 +200,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(width: 10),
+            ValueSizes.medium.width,
             Text(
               tagArticleList[index],
               style: FontSized.fontLow,
@@ -220,7 +223,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
 
   dialogTags() {
     return Get.bottomSheet(
-      elevation: 10,
+      elevation: ValueSizes.medium,
       ignoreSafeArea: true,
 
       Container(
@@ -228,14 +231,14 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
 
         decoration: const BoxDecoration(
           color: Colors.white,
-          boxShadow: [BoxShadow(blurRadius: 10, color: Colors.white38)],
+          boxShadow: [BoxShadow(blurRadius: ValueSizes.medium, color: Colors.white38)],
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
         ),
         child: SizedBox(
-          height: Get.height / 10,
+          height: Get.height / ValueSizes.medium,
           child: ListView.builder(
             itemCount: TagsAdd.addTags.length,
             scrollDirection: Axis.horizontal,
@@ -245,7 +248,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
                 padding: EdgeInsets.only(
                   top: Get.height / 7.5,
                   bottom: Get.height / 7.5,
-                  left: 20,
+                  left: ValueSizes.veryhigh,
                 ),
                 child: GestureDetector(
                   onTap: () {
@@ -274,7 +277,7 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
                     width: Get.width / 4,
                     decoration: BoxDecoration(
                       border: Border.all(width: 2, color: Colors.blue),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(ValueSizes.veryhigh),
                     ),
                     child: Align(
                       alignment: Alignment.center,
@@ -306,7 +309,7 @@ class SelectImageContainer extends StatelessWidget {
       () => GestureDetector(
         onTap: () {
           //to select image for photo in Article Write
-          SelectFile().selectImageFile();
+          SelectFile().selectImageFile(FileType.image);
         },
         child: Stack(
           children: [
@@ -314,8 +317,8 @@ class SelectImageContainer extends StatelessWidget {
               height: Get.height / 3.7,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(ValueSizes.veryhigh),
+                  topRight: Radius.circular(ValueSizes.veryhigh),
                 ),
                 image: DecorationImage(
                   image:

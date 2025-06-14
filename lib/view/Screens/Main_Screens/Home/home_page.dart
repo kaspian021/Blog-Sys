@@ -6,7 +6,7 @@ import 'package:blog_system_app/controller/Main_Screens/Articles/article_control
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
 import 'package:blog_system_app/controller/Register/check_login_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
-import 'package:blog_system_app/view/route_Screen/routs_name.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

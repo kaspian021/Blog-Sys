@@ -3,7 +3,7 @@ import 'package:blog_system_app/controller/Animation_controller/Home_Screen_anim
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
 import 'package:blog_system_app/controller/Register/check_login_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
-import 'package:blog_system_app/view/route_Screen/routs_name.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

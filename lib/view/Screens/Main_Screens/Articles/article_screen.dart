@@ -1,12 +1,14 @@
 
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/temps.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Main_Screens/Articles/article_controller.dart';
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
-import 'package:blog_system_app/view/route_Screen/routs_name.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:blog_system_app/component/extension_app.dart';
 
 class ArticleScreen extends StatelessWidget {
   ArticleScreen({super.key});
@@ -20,7 +22,7 @@ class ArticleScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -34,7 +36,7 @@ class ArticleScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20,),
+              ValueSizes.high.height,
               SizedBox(
                 height: Get.height/1.25,
           

@@ -1,4 +1,6 @@
 
+import 'package:blog_system_app/component/extension_app.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:blog_system_app/view/Screens/register&Login/login_screen.dart';
 import 'package:blog_system_app/view/Screens/register&Login/register_screen.dart';
@@ -67,10 +69,10 @@ class _SelectRegisterState extends State<SelectRegister>
                 ),
                 child: Column(
                   children: [
-                    const SizedBox(height: 10),
+                    ValueSizes.medium.height,
                     //select_login||signUP
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(ValueSizes.veryMedium),
                       child: Obx(
                         () => Column(
                           children: [
@@ -148,7 +150,7 @@ class _SelectRegisterState extends State<SelectRegister>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    ValueSizes.medium.height,
                     //login_screen|| SignUpScreen
                     Obx(
                       () =>

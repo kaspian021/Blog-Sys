@@ -2,7 +2,7 @@
 import 'dart:developer';
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/service.dart';
-import 'package:blog_system_app/view/route_Screen/routs_name.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';

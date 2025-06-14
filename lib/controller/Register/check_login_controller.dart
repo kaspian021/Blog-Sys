@@ -1,8 +1,8 @@
 
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/service.dart';
-import 'package:blog_system_app/view/Screens/StartScreens/onboarding_screen.dart';
-import 'package:blog_system_app/view/route_Screen/routs_name.dart';
+import 'package:blog_system_app/view/Screens/StartScreens/onbordingScreen/onboarding_screen.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:get/get.dart';
 
 class CheckLoginController extends GetxController {

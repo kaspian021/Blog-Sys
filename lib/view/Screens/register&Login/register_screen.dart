@@ -1,15 +1,14 @@
-
+import 'package:blog_system_app/component/extension_app.dart';
+import 'package:blog_system_app/component/temps.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
+import 'package:blog_system_app/component/widget_custom.dart';
 import 'package:blog_system_app/controller/Animation_controller/registerAnimation/signup_animation_screen.dart';
 import 'package:blog_system_app/controller/Register/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({
-    super.key,
-    required this.textStyle,
-
-  });
+  const SignUpScreen({super.key, required this.textStyle});
   // ignore: prefer_typing_uninitialized_variables
   final textStyle;
 
@@ -19,13 +18,11 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen>
     with SingleTickerProviderStateMixin {
-  
-  
-  final controller= Get.find<RegisterController>();
+  final controller = Get.find<RegisterController>();
 
   @override
   void initState() {
-    SignUpAnimationScreen.animationController=AnimationController(
+    SignUpAnimationScreen.animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
     );
@@ -63,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen>
             child: AnimatedBuilder(
               builder: (context, widgets) {
                 return Obx(
-                  ()=> Column(
+                  () => Column(
                     children: [
                       Align(
                         alignment: Alignment.topLeft,
@@ -72,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                           style: widget.textStyle.bodyLarge,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      ValueSizes.low.height,
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -80,73 +77,46 @@ class _SignUpScreenState extends State<SignUpScreen>
                           style: widget.textStyle.bodySmall,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      (ValueSizes.high+1).height,
                       //Username
-                      TextField(
-                        onChanged: (value) {
-                          if(value.isNotEmpty){
-                            controller.username.value=true;
-                          }else{
-                            controller.username.value=false;
-                          }
-                        },
-                        style: widget.textStyle.titleSmall,
-                        cursorHeight: 18,
-                        cursorWidth: 1,
-                        expands: false,
-                        controller: controller.textUserNameEditingController,
-                        decoration: InputDecoration(
-                          icon: controller.username.value? const Icon(Icons.check,color: Colors.green,) :const Icon(Icons.person),
-                          labelStyle: widget.textStyle.titleMedium,
-                          label: const Text('Username'),
-                          fillColor: Colors.black,
-                          hoverColor: Colors.black,
-                          contentPadding: const EdgeInsets.only(left: 2),
-                          hintFadeDuration: const Duration(seconds: 1),
+                      Obx(
+                        ()=> AppTextField(
+                          controller: controller,
+                          controllerTextEditing: controller.textUserNameEditingController,
+                          position: 'username',
+                          icon:
+                              controller.username.value
+                                  ? const Icon(Icons.check, color: Colors.green)
+                                  : const Icon(Icons.person),
+                                  
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      
+                      ValueSizes.veryhigh.height,
                       //Email
-                      TextField(
-                        onChanged: (value) {
-                          
-                          if(value.isEmail){
-
-                            controller.isEmailOk.value=true;
-                          }else{
-                            controller.isEmailOk.value=false;
-                          }
-
-                        },
-                        style: widget.textStyle.titleSmall,
-                        cursorHeight: 18,
-                        cursorWidth: 1,
-                        expands: false,
-                        controller: controller.textEmailEditingController,
-                        decoration: InputDecoration(
-                          icon: controller.isEmailOk.value? const Icon(Icons.check,color: Colors.green,): const Icon(Icons.email),
-                          labelStyle: widget.textStyle.titleMedium,
-                          label: const Text('Email'),
-                          fillColor: Colors.black,
-                          hoverColor: Colors.black,
-                          contentPadding: const EdgeInsets.only(left: 2),
-                          hintFadeDuration: const Duration(seconds: 1),
+                      Obx(
+                        ()=> AppTextField(
+                          controller: controller,
+                          controllerTextEditing: controller.textEmailEditingController,
+                          position: 'Email',
+                          icon:
+                              controller.isEmailOk.value
+                                    ? const Icon(Icons.check, color: Colors.green)
+                                    : const Icon(Icons.email),
+                                  
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      ValueSizes.veryhigh.height,
                       //password
                       TextField(
                         onChanged: (value) {
-                          
-                          if(value.length >=7){
-
-                            controller.isPassportOk.value=true;
-                          }else{
-                            controller.isPassportOk.value=false;
+                          if (value.length >= 7) {
+                            controller.isPassportOk.value = true;
+                          } else {
+                            controller.isPassportOk.value = false;
                           }
-
                         },
-                        
+
                         obscureText: controller.obscureTextBool.value,
                         style: widget.textStyle.titleSmall,
                         cursorHeight: 18,
@@ -154,14 +124,17 @@ class _SignUpScreenState extends State<SignUpScreen>
                         expands: false,
                         controller: controller.textPasswordUPEditingController,
                         decoration: InputDecoration(
-                          icon: controller.isPassportOk.value? const Icon(Icons.check,color: Colors.green,): const Icon(Icons.lock),
+                          icon:
+                              controller.isPassportOk.value
+                                  ? const Icon(Icons.check, color: Colors.green)
+                                  : const Icon(Icons.lock),
                           labelStyle: widget.textStyle.titleMedium,
                           label: const Text('Password'),
                           fillColor: Colors.black,
                           hoverColor: Colors.black,
                           contentPadding: const EdgeInsets.only(left: 2),
                           hintFadeDuration: const Duration(seconds: 1),
-                          
+
                           suffixIcon: InkWell(
                             onTap: () {
                               controller.obscureTextBool.value
@@ -169,14 +142,16 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   : controller.obscureTextBool.value = true;
                             },
                             child: Text(
-                              controller.obscureTextBool.value ? 'show' : 'Hide',
-                              
-                                  style: widget.textStyle.titleMedium,
+                              controller.obscureTextBool.value
+                                  ? 'show'
+                                  : 'Hide',
+
+                              style: widget.textStyle.titleMedium,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      ValueSizes.veryhigh.height,
                       //Submit_Button
                       ElevatedButton(
                         style: ButtonStyle(
@@ -185,28 +160,28 @@ class _SignUpScreenState extends State<SignUpScreen>
                           ),
                         ),
                         onPressed: () {
-                          if(controller.isEmailOk.value){
-
+                          if (controller.isEmailOk.value) {
                             //create_account
                             controller.signUpWithEmailAndPassword();
-
-                          }else{
+                          } else {
                             Get.snackbar('Error', 'email nothing');
                           }
-                          
                         },
-                        child: Text('CREATE', style: widget.textStyle.titleLarge),
+                        child: Text(
+                          'CREATE',
+                          style: widget.textStyle.titleLarge,
+                        ),
                       ),
-                      
-                      
+
                       const SizedBox(height: 30),
-                      Text('Or sign in with',
-                                  style: widget.textStyle.titleMedium,),
-                      const Row(
-                        children: [
+                      Text(
+                        'Or sign in with',
+                        style: widget.textStyle.titleMedium,
+                      ),
+                      const Row(children: [
 
                         ],
-                      )
+                      ),
                     ],
                   ),
                 );

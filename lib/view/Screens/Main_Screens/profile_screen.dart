@@ -1,6 +1,8 @@
 
 
+import 'package:blog_system_app/component/extension_app.dart';
 import 'package:blog_system_app/component/service.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Main_Screens/profile_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textStyle = Theme.of(context).textTheme;
-    var sizebody = MediaQuery.of(context).size.width / 10;
+    var sizebody = MediaQuery.of(context).size.width / ValueSizes.high;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -73,13 +75,13 @@ class ProfileScreen extends StatelessWidget {
                         boxShadow: const [
                           BoxShadow(color: Colors.black26, blurRadius: 4.2),
                         ],
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(ValueSizes.veryhigh),
                       ),
                       child: Padding(
                         padding: EdgeInsets.only(
                           left: sizebody,
                           right: sizebody,
-                          top: sizebody - 20,
+                          top: sizebody - ValueSizes.veryhigh,
                         ),
                         child: Column(
                           children: [
@@ -151,7 +153,7 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 20),
+                            ValueSizes.veryhigh.height,
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
@@ -159,7 +161,7 @@ class ProfileScreen extends StatelessWidget {
                                 style: textStyle.titleMedium,
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            ValueSizes.medium.height,
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Text(

@@ -1,8 +1,8 @@
 
 import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/controller/Register/login_controller.dart';
-import 'package:blog_system_app/view/route_Screen/routs.dart';
-import 'package:blog_system_app/view/route_Screen/routs_name.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

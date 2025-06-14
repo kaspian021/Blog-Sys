@@ -16,6 +16,8 @@ class ColorsConst {
 
   static const colorPrimery = Color.fromARGB(255, 55, 106, 237);
   static const colorDivider = Color.fromARGB(97, 123, 139, 178);
+  static const colorbackgroundScaffold = Colors.white;
+  
 }
 
 class FontSized {
@@ -50,8 +52,12 @@ class FontSized {
 class ConstText {
   ConstText._();
 
+  //onbording Screen
+
   static const concetArticleWrite =
       'Write the best article and share everything you know about the computer world. Always remember that this article is the beginning of the path for many (:';
+
+  
 }
 
 //theme_Project
@@ -71,6 +77,7 @@ ThemeData dataTheme() {
         ),
       ),
     ),
+    scaffoldBackgroundColor: ColorsConst.colorbackgroundScaffold,
 
     textTheme: const TextTheme(
       bodyLarge: TextStyle(
