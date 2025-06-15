@@ -78,44 +78,5 @@ ThemeData dataTheme() {
       ),
     ),
     scaffoldBackgroundColor: ColorsConst.colorbackgroundScaffold,
-
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(
-        fontFamily: 'Avenir',
-        fontWeight: FontWeight.w700,
-        color: Colors.black,
-        fontSize: 22,
-      ),
-      bodyMedium: TextStyle(
-        fontFamily: 'Avenir',
-        fontWeight: FontWeight.w700,
-        color: Colors.white,
-        fontSize: 18,
-      ),
-      bodySmall: TextStyle(
-        fontFamily: 'Avenir',
-        fontWeight: FontWeight.w300,
-        color: Colors.black,
-        fontSize: 12,
-      ),
-      titleLarge: TextStyle(
-        fontFamily: 'Avenir',
-        fontWeight: FontWeight.w700,
-        color: Colors.white,
-        fontSize: 16,
-      ),
-      titleMedium: TextStyle(
-        fontFamily: 'Avenir',
-        fontWeight: FontWeight.w300,
-        color: Colors.black,
-        fontSize: 16,
-      ),
-      headlineMedium: TextStyle(
-        fontFamily: 'Avenir',
-        fontWeight: FontWeight.w700,
-        color: Colors.black,
-        fontSize: 18,
-      ),
-    ),
   );
 }

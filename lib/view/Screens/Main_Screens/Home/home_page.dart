@@ -2,6 +2,7 @@
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/service.dart';
 import 'package:blog_system_app/component/temps.dart';
+import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/controller/Main_Screens/Articles/article_controller.dart';
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
 import 'package:blog_system_app/controller/Register/check_login_controller.dart';
@@ -18,14 +19,14 @@ class HomePage extends StatelessWidget {
     required this.sizeBody,
     required this.controller,
     required this.box,
-    required this.textstyle,
+
 
   });
 
   final double sizeBody;
   final HomeController controller;
   final GetStorage box;
-  final TextTheme textstyle;
+
 
   final controllerArticleSingle= Get.find<ArticleController>();
   final loginController= Get.find<CheckLoginController>();
@@ -51,7 +52,7 @@ class HomePage extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Hi, ${!loginController.isLogin.value ? box.read(SaveToken.userName) : null}',
-                    style: textstyle.titleMedium,
+                    style: LightTextStyleApp.textLableandTitleTextStyle,
                   ), //username
                 ),
                 const Icon(Icons.notifications_active_outlined),
@@ -62,9 +63,9 @@ class HomePage extends StatelessWidget {
           //Top seller relativ to the Articles
           Padding(
             padding: EdgeInsets.only(left: sizeBody),
-            child: Align(
+            child: const Align(
               alignment: Alignment.topLeft,
-              child: Text("Top Seller's", style: textstyle.bodyLarge),
+              child: Text("Top Seller's", style: LightTextStyleApp.textTitleLarge),
             ),
           ),
           const SizedBox(height: 10),
@@ -111,7 +112,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      Text('name', style: textstyle.bodySmall), //Names Sellers
+                      const Text('name', style: LightTextStyleApp.textNamesSmall), //Names Sellers
                     ],
                   ),
                 );
@@ -157,9 +158,9 @@ class HomePage extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: Get.width / 2, left: 20),
-                        child: Text(
+                        child: const Text(
                           'Technology',
-                          style: textstyle.bodyMedium,
+                          style: LightTextStyleApp.textSubjectTextStyle,
                         ), //Names topSubjectArticles
                       ),
                     ],
@@ -174,8 +175,8 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.only(left: sizeBody, right: sizeBody),
             child: Row(
               children: [
-                Expanded(
-                  child: Text('Latest News', style: textstyle.headlineMedium),
+                const Expanded(
+                  child: Text('Latest News', style: LightTextStyleApp.textSubjectDarkTextStyle),
                 ),
                 GestureDetector(
                   onTap: () => controller.colorIcon.value=1,
@@ -202,7 +203,7 @@ class HomePage extends StatelessWidget {
                           controller.listArticlesTopVisited
                               .map(
                                 (f) =>
-                                    _buildArticleItem(f, textstyle, sizeBody),
+                                    _buildArticleItem(f, sizeBody),
                               ) //list_neverScroller with Column
                               .toList(),
                     )
@@ -214,7 +215,7 @@ class HomePage extends StatelessWidget {
   }
   
   //Articles_New
-  Widget _buildArticleItem(article, textstyle, sizeBody) {
+  Widget _buildArticleItem(article, sizeBody) {
     return Padding(
       padding: EdgeInsets.only(
         left: sizeBody,
@@ -275,10 +276,7 @@ class HomePage extends StatelessWidget {
                                 text: TextSpan(
                                   text: article.title,
                   
-                                  style: const TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
+                                  style: LightTextStyleApp.titleArticleTextStyle
                                 ),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,

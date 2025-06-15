@@ -1,6 +1,7 @@
 
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/temps.dart';
+import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Main_Screens/Articles/article_controller.dart';
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
@@ -113,10 +114,7 @@ class ArticleScreen extends StatelessWidget {
                                                 text: TextSpan(
                                                   text:item[index].title!,
                                             
-                                                  style: const TextStyle(
-                                                    fontSize: 13,
-                                                    color: Colors.black,
-                                                  ),
+                                                  style: LightTextStyleApp.titleArticleTextStyle,
                                                 ),
                                                 overflow: TextOverflow.ellipsis,
                                                 maxLines: 3,

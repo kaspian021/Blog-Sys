@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:blog_system_app/component/extension_app.dart';
 import 'package:blog_system_app/component/service.dart';
 import 'package:blog_system_app/component/temps.dart';
+import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Main_Screens/Articles/article_write_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
@@ -134,16 +135,12 @@ class _ArticleWriteScreenState extends State<ArticleWriteScreen> {
                         Expanded(
                           child: Text(
                             "Add Tags",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: 'Avenir',
-                              color: ColorsConst.colorPrimery,
-                            ),
+                            style: LightTextStyleApp.addTagsTextStyle
                           ),
                         ),
                         Icon(
                           Icons.edit,
-                          color: ColorsConst.colorPrimery,
+                          color: Color.fromARGB(255, 65, 73, 94),
                           size: 25,
                         ),
                         SizedBox(width: 30,)

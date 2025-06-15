@@ -1,4 +1,5 @@
 import 'package:blog_system_app/component/extension_app.dart';
+import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/component/widget_custom.dart';
 import 'package:blog_system_app/controller/Animation_controller/registerAnimation/signup_animation_screen.dart';
@@ -7,9 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key, required this.textStyle});
-  // ignore: prefer_typing_uninitialized_variables
-  final textStyle;
+  const SignUpScreen({super.key});
+
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -61,19 +61,19 @@ class _SignUpScreenState extends State<SignUpScreen>
                 return Obx(
                   () => Column(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Create an account',
-                          style: widget.textStyle.bodyLarge,
+                          style: LightTextStyleApp.textTitleLarge,
                         ),
                       ),
                       ValueSizes.low.height,
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Sign Up with your Email',
-                          style: widget.textStyle.bodySmall,
+                          style: LightTextStyleApp.textNamesSmall,
                         ),
                       ),
                       (ValueSizes.high+1).height,
@@ -117,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                         },
 
                         obscureText: controller.obscureTextBool.value,
-                        style: widget.textStyle.titleSmall,
+                        style: LightTextStyleApp.textSubjectDarkTextStyle,
                         cursorHeight: 18,
                         cursorWidth: 1,
                         expands: false,
@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                               controller.isPassportOk.value
                                   ? const Icon(Icons.check, color: Colors.green)
                                   : const Icon(Icons.lock),
-                          labelStyle: widget.textStyle.titleMedium,
+                          labelStyle: LightTextStyleApp.textLableandTitleTextStyle,
                           label: const Text('Password'),
                           fillColor: Colors.black,
                           hoverColor: Colors.black,
@@ -145,7 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   ? 'show'
                                   : 'Hide',
 
-                              style: widget.textStyle.titleMedium,
+                              style: LightTextStyleApp.textLableandTitleTextStyle,
                             ),
                           ),
                         ),
@@ -168,14 +168,14 @@ class _SignUpScreenState extends State<SignUpScreen>
                         },
                         child: Text(
                           'CREATE',
-                          style: widget.textStyle.titleLarge,
+                          style: LightTextStyleApp.textLableandTitleWhiteTextStyle,
                         ),
                       ),
 
                       const SizedBox(height: 30),
-                      Text(
+                      const Text(
                         'Or sign in with',
-                        style: widget.textStyle.titleMedium,
+                        style: LightTextStyleApp.textLableandTitleTextStyle,
                       ),
                       const Row(children: [
 

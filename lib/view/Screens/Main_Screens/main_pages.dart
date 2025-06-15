@@ -24,7 +24,7 @@ class MainPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textstyle = Theme.of(context).textTheme;
+
     var sizeBody = MediaQuery.of(context).size.width / 12;
     return SafeArea(
       child: Scaffold(
@@ -35,7 +35,7 @@ class MainPages extends StatelessWidget {
         
         drawerScrimColor: Colors.black,
         //Drawer programm
-        endDrawer: DrawerBlogSys(textstyle: textstyle),
+        endDrawer: const DrawerBlogSys(),
 
         //bottomNavigationBar
         bottomNavigationBar: BottomNavigationBlogSys(
@@ -53,7 +53,6 @@ class MainPages extends StatelessWidget {
                 sizeBody: sizeBody,
                 controller: controller,
                 box: WidgetsAndVariableStatic.box,
-                textstyle: textstyle,
               ),
               ArticleScreen(),
               const ArticleWriteScreen()

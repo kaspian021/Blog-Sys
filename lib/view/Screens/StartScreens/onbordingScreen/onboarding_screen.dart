@@ -1,4 +1,5 @@
 import 'package:blog_system_app/component/extension_app.dart';
+import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
@@ -68,7 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final TextTheme textstyle = Theme.of(context).textTheme;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 244, 247, 255),
@@ -109,12 +110,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       children: [
                         Text(
                           contentListOnbording[currentPage].title!,
-                          style: textstyle.bodyLarge,
+                          style: LightTextStyleApp.textTitleLarge,
                         ),
                         ValueSizes.high.height,
                         Text(
                           contentListOnbording[currentPage].description!,
-                          style: textstyle.bodySmall,
+                          style: LightTextStyleApp.textNamesSmall,
                         ),
                         ValueSizes.ultry.height,
                         Row(
@@ -144,12 +145,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   borderRadius: BorderRadius.circular(10),
                                   shape: BoxShape.rectangle,
                                 ),
-                                child: Row(
+                                child: const Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text('Start', style: textstyle.bodyMedium),
-                                    const Icon(
+                                    Text('Start', style: LightTextStyleApp.textSubjectTextStyle),
+                                    Icon(
                                       Icons.arrow_forward,
                                       color: Colors.white,
                                       size: 20,

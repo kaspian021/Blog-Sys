@@ -1,6 +1,8 @@
 
 import 'package:blog_system_app/component/extension_app.dart';
+import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
+import 'package:blog_system_app/component/widget_custom.dart';
 import 'package:blog_system_app/controller/Animation_controller/registerAnimation/login_animation_screen.dart';
 import 'package:blog_system_app/controller/Register/login_controller.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,9 @@ import 'package:get/get.dart';
 // ignore: must_be_immutable
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key, required this.textStyle});
+  const LoginScreen({super.key,});
 
-  final TextTheme textStyle;
+
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -65,47 +67,33 @@ class _LoginScreenState extends State<LoginScreen>
                 return Obx(
                   () => Column(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Welcome back',
-                          style: widget.textStyle.bodyLarge,
+                          style: LightTextStyleApp.textTitleLarge,
                         ),
                       ),
                       ValueSizes.low.height,
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Sign in with your account',
-                          style: widget.textStyle.bodySmall,
+                          style: LightTextStyleApp.textNamesSmall,
                         ),
                       ),
                       (ValueSizes.high+1).height,
                       //Email
-                      TextField(
-                        onChanged: (value) {
-                          if (value.isEmail) {
-                            controller.isEmailOk.value = true;
-                          } else {
-                            controller.isEmailOk.value = false;
-                          }
-                        },
-                        style: widget.textStyle.titleSmall,
-                        cursorHeight: 18,
-                        cursorWidth: 1,
-                        expands: false,
-                        controller: controller.textEmailEditingController,
-                        decoration: InputDecoration(
+                      Obx(
+                        ()=> AppTextField(
+                          controller: controller,
+                          controllerTextEditing: controller.textEmailEditingController,
+                          position: 'Email',
                           icon:
                               controller.isEmailOk.value
-                                  ? const Icon(Icons.check, color: Colors.green)
-                                  : const Icon(Icons.email),
-                          labelStyle: widget.textStyle.titleMedium,
-                          label: const Text('Email'),
-                          fillColor: Colors.black,
-                          hoverColor: Colors.black,
-                          contentPadding: const EdgeInsets.only(left: 2),
-                          hintFadeDuration: const Duration(seconds: 1),
+                                    ? const Icon(Icons.check, color: Colors.green)
+                                    : const Icon(Icons.email),
+                                  
                         ),
                       ),
                       (ValueSizes.veryhigh+15).height,
@@ -120,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen>
                         },
 
                         obscureText: controller.obscureTextBool.value,
-                        style: widget.textStyle.titleSmall,
+                        style: LightTextStyleApp.textNamesSmall,
                         cursorHeight: 18,
                         cursorWidth: 1,
                         expands: false,
@@ -130,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen>
                               controller.isPassportOk.value
                                   ? const Icon(Icons.check, color: Colors.green)
                                   : const Icon(Icons.lock),
-                          labelStyle: widget.textStyle.titleMedium,
+                          labelStyle: LightTextStyleApp.textLableandTitleTextStyle,
                           label: const Text('Password'),
                           fillColor: Colors.black,
                           hoverColor: Colors.black,
@@ -147,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen>
                               controller.obscureTextBool.value
                                   ? 'show'
                                   : 'Hide',
-                                  style: widget.textStyle.titleMedium,
+                                  style: LightTextStyleApp.textLableandTitleTextStyle,
                             ),
                           ),
                         ),
@@ -162,24 +150,28 @@ class _LoginScreenState extends State<LoginScreen>
                             Get.snackbar('Error', 'email nothing');
                           }
                         },
-                        child: Text(
+                        child: const Text(
                           'LOGIN',
-                          style: widget.textStyle.titleLarge,
+                          style: LightTextStyleApp.textLableandTitleWhiteTextStyle,
                         ),
                       ),
                       (ValueSizes.veryhigh+20).height,
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('Forgot your password?',
-                                  style: widget.textStyle.titleMedium,),
-                          const SizedBox(width: 5),
+                                  style: LightTextStyleApp.textLableandTitleTextStyle,),
+                          SizedBox(width: 5),
                           Text('Reset here',
-                                  style: widget.textStyle.titleMedium,),
+                                  style: LightTextStyleApp.textLableandTitleTextStyle,),
                         ],
                       ),
                       ValueSizes.veryhigh.height,
-                      const Text('Or sign in with'),
+                      const Text('Or sign in with',
+
+                        style: LightTextStyleApp.textLableandTitleTextStyle,
+                      
+                      ),
                     ],
                   ),
                 );

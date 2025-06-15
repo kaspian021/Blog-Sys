@@ -2,6 +2,7 @@
 
 import 'package:blog_system_app/component/extension_app.dart';
 import 'package:blog_system_app/component/service.dart';
+import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Main_Screens/profile_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
@@ -20,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = Theme.of(context).textTheme;
+
     var sizebody = MediaQuery.of(context).size.width / ValueSizes.high;
     return SafeArea(
       child: Scaffold(
@@ -34,8 +35,8 @@ class ProfileScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Expanded(
-                      child: Text('profile', style: textStyle.bodyLarge),
+                    const Expanded(
+                      child: Text('profile', style: LightTextStyleApp.textTitleLarge),
                     ),
                     //menu_Bar_pullDown
                     PullDownButton(
@@ -44,8 +45,8 @@ class ProfileScreen extends StatelessWidget {
                             PullDownMenuItem(
                               onTap: () {},
                               title: 'Chenge UserName',
-                              itemTheme: PullDownMenuItemTheme(
-                                textStyle: textStyle.bodyMedium,
+                              itemTheme: const PullDownMenuItemTheme(
+                                textStyle: LightTextStyleApp.textSubjectTextStyle,
                               ),
                             ),
                           ],
@@ -137,36 +138,36 @@ class ProfileScreen extends StatelessWidget {
                                   children: [
                                     Text(
                                       "${box.read(SaveToken.email)}", //email user
-                                      style: textStyle.bodySmall,
+                                      style: LightTextStyleApp.textNamesSmall,
                                     ),
                                     const SizedBox(height: 5),
                                     Text(
                                       "@${box.read(SaveToken.userName)}",
-                                      style: textStyle.headlineMedium,
+                                      style: LightTextStyleApp.textSubjectDarkTextStyle,
                                     ),
                                     const SizedBox(height: 5),
-                                    Text(
+                                    const Text(
                                       "Digikala",
-                                      style: textStyle.bodySmall,
+                                      style: LightTextStyleApp.textNamesSmall,
                                     ), //user name Seller bisines
                                   ],
                                 ),
                               ],
                             ),
                             ValueSizes.veryhigh.height,
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'About me',
-                                style: textStyle.titleMedium,
+                                style: LightTextStyleApp.textLableandTitleTextStyle,
                               ),
                             ),
                             ValueSizes.medium.height,
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'Madison Blackstone is a director of user experience design, with experience managing global teams.', // text AboutMe profile user
-                                style: textStyle.bodySmall,
+                                style: LightTextStyleApp.textNamesSmall,
                               ),
                             ),
                           ],

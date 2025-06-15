@@ -45,7 +45,7 @@ class _SelectRegisterState extends State<SelectRegister>
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = Theme.of(context).textTheme;
+
 
     return SafeArea(
       child: Scaffold(
@@ -155,8 +155,8 @@ class _SelectRegisterState extends State<SelectRegister>
                     Obx(
                       () =>
                           loginSelect.value
-                              ? LoginScreen(textStyle: textStyle)
-                              : SignUpScreen(textStyle: textStyle),
+                              ? const LoginScreen()
+                              : const SignUpScreen(),
                     ),
                   ],
                 ),

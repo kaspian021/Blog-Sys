@@ -1,4 +1,7 @@
 
+import 'package:blog_system_app/component/extension_app.dart';
+import 'package:blog_system_app/component/text_style_app.dart';
+import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Animation_controller/Home_Screen_animation/drawer_animation_home.dart';
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
 import 'package:blog_system_app/controller/Register/check_login_controller.dart';
@@ -8,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DrawerBlogSys extends StatefulWidget {
-  const DrawerBlogSys({super.key, required this.textstyle});
+  const DrawerBlogSys({super.key});
 
-  final TextTheme textstyle;
+ 
 
   @override
   State<DrawerBlogSys> createState() => _DrawerBlogSysState();
@@ -129,11 +132,7 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
                                       ),
                                   child: const Text(
                                     'Login',
-                                    style: TextStyle(
-                                      fontFamily: 'Avenir',
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                    ),
+                                    style: LightTextStyleApp.textLoginTextStyle
                                   ),
                                 ),
                       ),
@@ -168,12 +167,12 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
                       style: BorderStyle.solid,
                     ),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
-                      const SizedBox(width: 20),
-                      const Icon(Icons.person, size: 35),
-                      const SizedBox(width: 5),
-                      Text('Support', style: widget.textstyle.bodyLarge),
+                      SizedBox(width: 20),
+                      Icon(Icons.person, size: 35),
+                      SizedBox(width: 5),
+                      Text('Support', style: LightTextStyleApp.textTitleLarge),
                     ],
                   ),
                 ),
@@ -206,7 +205,7 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
                         style: BorderStyle.solid,
                       ),
                     ),
-                    child: Center(child: Text('Github', style: widget.textstyle.bodyLarge)),
+                    child: const Center(child: Text('Github', style: LightTextStyleApp.textTitleLarge)),
                   ),
                 ),
               ),
@@ -239,12 +238,12 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
                         style: BorderStyle.solid,
                       ),
                     ),
-                    child: Row(
+                    child:  Row(
                       children: [
-                        const SizedBox(width: 20),
+                        ValueSizes.veryhigh.width,
                         const Icon(Icons.telegram, size: 35),
-                        const SizedBox(width: 5),
-                        Text('Telegram', style: widget.textstyle.bodyLarge),
+                        ValueSizes.verylow.width,
+                        const Text('Telegram', style: LightTextStyleApp.textTitleLarge),
                       ],
                     ),
                   ),
