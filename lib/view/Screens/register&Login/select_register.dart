@@ -5,7 +5,7 @@ import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:blog_system_app/view/Screens/register&Login/login_screen.dart';
 import 'package:blog_system_app/view/Screens/register&Login/register_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 // ignore: must_be_immutable
 class SelectRegister extends StatefulWidget {
@@ -19,8 +19,8 @@ class _SelectRegisterState extends State<SelectRegister>
     with SingleTickerProviderStateMixin {
 
   //controll_Screen    
-  RxBool loginSelect = true.obs;
-  RxBool signUpSelect = false.obs;
+  bool loginSelect = true;
+  bool signUpSelect = false;
 
   //Controller_Register
   
@@ -46,6 +46,7 @@ class _SelectRegisterState extends State<SelectRegister>
   @override
   Widget build(BuildContext context) {
 
+    final Size size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(
@@ -59,7 +60,7 @@ class _SelectRegisterState extends State<SelectRegister>
               const SizedBox(height: 30),
               //container_Login
               Container(
-                height: Get.height / 1.2,
+                height: size.height / 1.2,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 24, 27, 211),
                   borderRadius: BorderRadius.only(
@@ -73,8 +74,7 @@ class _SelectRegisterState extends State<SelectRegister>
                     //select_login||signUP
                     Padding(
                       padding: const EdgeInsets.all(ValueSizes.veryMedium),
-                      child: Obx(
-                        () => Column(
+                      child: Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -82,11 +82,11 @@ class _SelectRegisterState extends State<SelectRegister>
                                 GestureDetector(
                                   onTap: () {
                                     
-                                      if (!loginSelect.value &&
-                                          signUpSelect.value) {
-                                        loginSelect.value =
+                                      if (!loginSelect &&
+                                          signUpSelect) {
+                                        loginSelect =
                                             true;
-                                        signUpSelect.value =
+                                        signUpSelect =
                                             false;
                                             controller.reverse();
                                       }
@@ -100,7 +100,7 @@ class _SelectRegisterState extends State<SelectRegister>
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.w700,
                                       color:
-                                          loginSelect.value
+                                          loginSelect
                                               ? Colors.white
                                               : Colors.white30,
                                       fontSize: 16,
@@ -110,12 +110,12 @@ class _SelectRegisterState extends State<SelectRegister>
                                 GestureDetector(
                                   onTap: () {
                                     
-                                      if (!signUpSelect.value &&
-                                          loginSelect.value) {
+                                      if (!signUpSelect &&
+                                          loginSelect) {
                                         
-                                        signUpSelect.value =
+                                        signUpSelect =
                                             true;
-                                        loginSelect.value =
+                                        loginSelect =
                                             false;
                                             controller.forward();
                                       }
@@ -128,7 +128,7 @@ class _SelectRegisterState extends State<SelectRegister>
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.w700,
                                       color:
-                                          signUpSelect.value
+                                          signUpSelect
                                               ? Colors.white
                                               : Colors.white30,
                                       fontSize: 16,
@@ -142,22 +142,22 @@ class _SelectRegisterState extends State<SelectRegister>
                               child: Divider(
                                 thickness: 2,
                                 color: Colors.white,
-                                indent: Get.width / 2.7,
-                                endIndent: Get.width / 2.7,
+                                indent: size.width / 2.7,
+                                endIndent: size.width / 2.7,
                               ),
                             ),
                           ],
-                        ),
+                        
                       ),
                     ),
                     ValueSizes.medium.height,
                     //login_screen|| SignUpScreen
-                    Obx(
-                      () =>
-                          loginSelect.value
-                              ? const LoginScreen()
-                              : const SignUpScreen(),
-                    ),
+                    // Obx(
+                    //   () =>
+                    //       loginSelect
+                    //           ? const LoginScreen()
+                    //           : const SignUpScreen(),
+                    // ),
                   ],
                 ),
               ),

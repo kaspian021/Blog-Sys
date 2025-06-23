@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
-
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -76,33 +75,47 @@ class _SignUpScreenState extends State<SignUpScreen>
                           style: LightTextStyleApp.textNamesSmall,
                         ),
                       ),
-                      (ValueSizes.high+1).height,
+                      (ValueSizes.high + 1).height,
                       //Username
                       Obx(
-                        ()=> AppTextField(
+                        () => AppTextField(
                           controller: controller,
-                          controllerTextEditing: controller.textUserNameEditingController,
+                          controllerTextEditing:
+                              controller.textUserNameEditingController,
                           position: 'username',
                           icon:
                               controller.username.value
                                   ? const Icon(Icons.check, color: Colors.green)
                                   : const Icon(Icons.person),
-                                  
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              controller.username.value = true;
+                            } else {
+                              controller.username.value = false;
+                            }
+                          },
                         ),
                       ),
-                      
+
                       ValueSizes.veryhigh.height,
                       //Email
                       Obx(
-                        ()=> AppTextField(
+                        () => AppTextField(
                           controller: controller,
-                          controllerTextEditing: controller.textEmailEditingController,
+                          controllerTextEditing:
+                              controller.textEmailEditingController,
                           position: 'Email',
                           icon:
                               controller.isEmailOk.value
-                                    ? const Icon(Icons.check, color: Colors.green)
-                                    : const Icon(Icons.email),
-                                  
+                                  ? const Icon(Icons.check, color: Colors.green)
+                                  : const Icon(Icons.email),
+                          onChanged: (value) {
+                            if (value.isEmail) {
+                              controller.isEmailOk.value = true;
+                            } else {
+                              controller.isEmailOk.value = false;
+                            }
+                          },
                         ),
                       ),
                       ValueSizes.veryhigh.height,
@@ -127,7 +140,8 @@ class _SignUpScreenState extends State<SignUpScreen>
                               controller.isPassportOk.value
                                   ? const Icon(Icons.check, color: Colors.green)
                                   : const Icon(Icons.lock),
-                          labelStyle: LightTextStyleApp.textLableandTitleTextStyle,
+                          labelStyle:
+                              LightTextStyleApp.textLableandTitleTextStyle,
                           label: const Text('Password'),
                           fillColor: Colors.black,
                           hoverColor: Colors.black,
@@ -145,7 +159,8 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   ? 'show'
                                   : 'Hide',
 
-                              style: LightTextStyleApp.textLableandTitleTextStyle,
+                              style:
+                                  LightTextStyleApp.textLableandTitleTextStyle,
                             ),
                           ),
                         ),
@@ -166,9 +181,10 @@ class _SignUpScreenState extends State<SignUpScreen>
                             Get.snackbar('Error', 'email nothing');
                           }
                         },
-                        child: Text(
+                        child: const Text(
                           'CREATE',
-                          style: LightTextStyleApp.textLableandTitleWhiteTextStyle,
+                          style:
+                              LightTextStyleApp.textLableandTitleWhiteTextStyle,
                         ),
                       ),
 

@@ -1,24 +1,24 @@
-
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/service.dart';
-import 'package:blog_system_app/view/Screens/StartScreens/onbordingScreen/onboarding_screen.dart';
 import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
-import 'package:get/get.dart';
-
-class CheckLoginController extends GetxController {
-
-  RxBool isLogin= false.obs;
+import 'package:flutter/widgets.dart';
 
 
-    Future<void> checkedLogin()async{
+class CheckLoginController{
+
+    CheckLoginController._();
+
+    static bool isLogin= false;
+
+    static Future<void> checkedLogin(context)async{
 
     if(await WidgetsAndVariableStatic.box.read(SaveToken.token)!=null){
-      Get.offAndToNamed(RoutsName.routeHomeScreen);
-      isLogin.value=true;
+      Navigator.pushNamed(context, RoutsName.routeHomeScreen);
+      isLogin=true;
       
     }else{
-      Get.off(const OnboardingScreen());
-      isLogin.value=false;
+      Navigator.pushReplacementNamed(context, RoutsName.routeOnbordingScreen);
+      isLogin=false;
     }
     
   }

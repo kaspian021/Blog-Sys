@@ -3,7 +3,7 @@ import 'package:blog_system_app/controller/Register/check_login_controller.dart'
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
+
 
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
 
-  final logincontroller= Get.find<CheckLoginController>();
+
 
   //animationController
   late AnimationController controller;
@@ -31,9 +31,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     controller.repeat();
 
-    Future.delayed(const Duration(seconds: 3)).then((onValue){
+    Future.delayed(const Duration(seconds: 3)).then((onValue)async{
 
-      logincontroller.checkedLogin();
+      await CheckLoginController.checkedLogin(context);
       
       
 

@@ -10,6 +10,7 @@ class RoutsName {
   static const routeArticlesList= '/ArticlesList';
   static const routeArticlesSingle= '/ArticlesSingle';
   static const routeArticlesWrite= '/ArticlesWrite';
+  static const routeOnbordingScreen= '/OnboardingScreen';
 
 
 }

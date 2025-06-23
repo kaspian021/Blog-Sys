@@ -1,4 +1,3 @@
-
 import 'package:blog_system_app/component/extension_app.dart';
 import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
@@ -11,9 +10,7 @@ import 'package:get/get.dart';
 // ignore: must_be_immutable
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key,});
-
-
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -46,7 +43,6 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
-   
     return Expanded(
       child: SlideTransition(
         position: LoginAnimationScreen.animationContainerLogin,
@@ -82,21 +78,28 @@ class _LoginScreenState extends State<LoginScreen>
                           style: LightTextStyleApp.textNamesSmall,
                         ),
                       ),
-                      (ValueSizes.high+1).height,
+                      (ValueSizes.high + 1).height,
                       //Email
                       Obx(
-                        ()=> AppTextField(
+                        () => AppTextField(
                           controller: controller,
-                          controllerTextEditing: controller.textEmailEditingController,
+                          controllerTextEditing:
+                              controller.textEmailEditingController,
                           position: 'Email',
                           icon:
                               controller.isEmailOk.value
-                                    ? const Icon(Icons.check, color: Colors.green)
-                                    : const Icon(Icons.email),
-                                  
+                                  ? const Icon(Icons.check, color: Colors.green)
+                                  : const Icon(Icons.email),
+                          onChanged: (value) {
+                            if (value.isEmail) {
+                              controller.isEmailOk.value = true;
+                            } else {
+                              controller.isEmailOk.value = false;
+                            }
+                          },
                         ),
                       ),
-                      (ValueSizes.veryhigh+15).height,
+                      (ValueSizes.veryhigh + 15).height,
                       //password
                       TextField(
                         onChanged: (value) {
@@ -118,7 +121,8 @@ class _LoginScreenState extends State<LoginScreen>
                               controller.isPassportOk.value
                                   ? const Icon(Icons.check, color: Colors.green)
                                   : const Icon(Icons.lock),
-                          labelStyle: LightTextStyleApp.textLableandTitleTextStyle,
+                          labelStyle:
+                              LightTextStyleApp.textLableandTitleTextStyle,
                           label: const Text('Password'),
                           fillColor: Colors.black,
                           hoverColor: Colors.black,
@@ -135,12 +139,13 @@ class _LoginScreenState extends State<LoginScreen>
                               controller.obscureTextBool.value
                                   ? 'show'
                                   : 'Hide',
-                                  style: LightTextStyleApp.textLableandTitleTextStyle,
+                              style:
+                                  LightTextStyleApp.textLableandTitleTextStyle,
                             ),
                           ),
                         ),
                       ),
-                      (ValueSizes.veryhigh+10).height,
+                      (ValueSizes.veryhigh + 10).height,
                       ElevatedButton(
                         onPressed: () {
                           if (controller.isEmailOk.value) {
@@ -152,25 +157,30 @@ class _LoginScreenState extends State<LoginScreen>
                         },
                         child: const Text(
                           'LOGIN',
-                          style: LightTextStyleApp.textLableandTitleWhiteTextStyle,
+                          style:
+                              LightTextStyleApp.textLableandTitleWhiteTextStyle,
                         ),
                       ),
-                      (ValueSizes.veryhigh+20).height,
+                      (ValueSizes.veryhigh + 20).height,
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Forgot your password?',
-                                  style: LightTextStyleApp.textLableandTitleTextStyle,),
+                          Text(
+                            'Forgot your password?',
+                            style: LightTextStyleApp.textLableandTitleTextStyle,
+                          ),
                           SizedBox(width: 5),
-                          Text('Reset here',
-                                  style: LightTextStyleApp.textLableandTitleTextStyle,),
+                          Text(
+                            'Reset here',
+                            style: LightTextStyleApp.textLableandTitleTextStyle,
+                          ),
                         ],
                       ),
                       ValueSizes.veryhigh.height,
-                      const Text('Or sign in with',
+                      const Text(
+                        'Or sign in with',
 
                         style: LightTextStyleApp.textLableandTitleTextStyle,
-                      
                       ),
                     ],
                   ),

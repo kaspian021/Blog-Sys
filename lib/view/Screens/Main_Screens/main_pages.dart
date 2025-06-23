@@ -1,5 +1,4 @@
 
-import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
@@ -12,52 +11,105 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class MainPages extends StatelessWidget {
-  MainPages({super.key});
+class CurrentScreen {
 
+  static const home= 0;
+  static const article= 1;
+  static const writeArticle= 2;
+  static const search= 3;
+
+} 
+
+class MainPages extends StatefulWidget {
+  const MainPages({super.key});
+
+  @override
+  State<MainPages> createState() => _MainPagesState();
+}
+
+class _MainPagesState extends State<MainPages> {
   
 
-  final logincontroller = Get.find<CheckLoginController>();
-  final controller = Get.find<HomeController>();
+  final List<int> routeHistory= [CurrentScreen.home];
+
+  int selectIndex = CurrentScreen.home;
 
   final GlobalKey<ScaffoldState> _keyGlobal = GlobalKey();
 
+  final GlobalKey<NavigatorState> _keyHome = GlobalKey();
+  final GlobalKey<NavigatorState> _keyArticle = GlobalKey();
+  final GlobalKey<NavigatorState> _keyWriteArticle = GlobalKey();
+  final GlobalKey<NavigatorState> _keySearch = GlobalKey();
+
+
+  late final map= {
+
+    CurrentScreen.home: _keyHome, 
+    CurrentScreen.article: _keyArticle, 
+    CurrentScreen.writeArticle: _keyWriteArticle, 
+    CurrentScreen.search: _keySearch, 
+
+  };
+
+  Future<bool> _onWillPop()async{
+
+    if(map[selectIndex]!.currentState!.canPop()){
+
+      map[selectIndex]!.currentState!.pop();
+    }else if(routeHistory.length>1){
+
+      routeHistory.removeLast();
+      selectIndex=routeHistory.last;
+
+    }
+
+
+    return false;
+  }
+
+  @override
+  void initState()async {
+    
+    await CheckLoginController.checkedLogin(context);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    var sizeBody = MediaQuery.of(context).size.width / 12;
-    return SafeArea(
-      child: Scaffold(
-        drawerEdgeDragWidth: ValueSizes.veryhigh,
-        key: _keyGlobal,
-        drawerEnableOpenDragGesture: false,
-        endDrawerEnableOpenDragGesture: true,
-        
-        drawerScrimColor: Colors.black,
-        //Drawer programm
-        endDrawer: const DrawerBlogSys(),
-
-        //bottomNavigationBar
-        bottomNavigationBar: BottomNavigationBlogSys(
-          controller: controller,
-          loginController: logincontroller,
-          keyGlobal: _keyGlobal,
-        ),
-
-        body: Obx(
-          () => IndexedStack(
-            index: controller.colorIcon.value,
-
-            children: [
-              HomePage(
-                sizeBody: sizeBody,
-                controller: controller,
-                box: WidgetsAndVariableStatic.box,
-              ),
-              ArticleScreen(),
-              const ArticleWriteScreen()
-            ],
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: SafeArea(
+        child: Scaffold(
+          drawerEdgeDragWidth: ValueSizes.veryhigh,
+          key: _keyGlobal,
+          drawerEnableOpenDragGesture: false,
+          endDrawerEnableOpenDragGesture: true,
+          
+          drawerScrimColor: Colors.black,
+          //Drawer programm
+          endDrawer: const DrawerBlogSys(),
+      
+          //bottomNavigationBar
+          bottomNavigationBar: BottomNavigationBlogSys(
+            selectIndex: selectIndex,
+            selectScreen: (p0) {
+              setState(() {
+                selectIndex=p0;
+              });
+            },
+            keyGlobal: _keyGlobal,
           ),
+      
+          body:IndexedStack(
+              index: selectIndex,
+      
+              children: [
+                HomePage(),
+                ArticleScreen(),
+                const ArticleWriteScreen()
+              ],
+            ),
         ),
       ),
     );
@@ -66,21 +118,23 @@ class MainPages extends StatelessWidget {
 
 // ignore: must_be_immutable
 class BottomNavigationBlogSys extends StatelessWidget {
-  const BottomNavigationBlogSys({
+  BottomNavigationBlogSys({
     super.key,
     required GlobalKey<ScaffoldState> keyGlobal,
-    required this.controller,
-    required this.loginController,
+    required this.selectScreen,
+    required this.selectIndex,
+    
   }) : _keyGlobal = keyGlobal;
 
-  final HomeController controller;
-  final CheckLoginController loginController;
+  final Function(int) selectScreen;
   final GlobalKey<ScaffoldState> _keyGlobal;
+  final int  selectIndex;
+
+  final HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Container(
+    return Container(
         height: Get.height / 9.90,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -92,27 +146,25 @@ class BottomNavigationBlogSys extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 IconButton(
-                  onPressed: () {
-                    controller.colorIcon.value = 0;
-                  },
+                  onPressed: ()=> selectScreen(CurrentScreen.home),
+                   
+
                   icon: Icon(
                     Icons.home_sharp,
                     size: 30,
                     color:
-                        controller.colorIcon.value == 0
-                            ? Colors.blue
-                            : Colors.black,
+                         selectIndex!= 0
+                            ? Colors.black
+                            : Colors.blue,
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
-                    controller.colorIcon.value = 1;
-                  },
+                  onPressed: ()=> selectScreen(CurrentScreen.article),
                   icon: Icon(
                     Icons.article_rounded,
                     size: 30,
                     color:
-                        controller.colorIcon.value == 1
+                        selectIndex== 1
                             ? Colors.blue
                             : Colors.black,
                   ),
@@ -121,8 +173,8 @@ class BottomNavigationBlogSys extends StatelessWidget {
                   onTap: () {
                     //if user islogin==true and isSeller => to write ArticleScreen
 
-                    if (loginController.isLogin.value && controller.isSeller.value) {
-                      controller.colorIcon.value=2;
+                    if (controller.isSeller.value) {
+                     selectScreen(CurrentScreen.writeArticle);
                     } else {
                       //to details permissionsScreen
                       Get.snackbar(
@@ -132,7 +184,7 @@ class BottomNavigationBlogSys extends StatelessWidget {
                         mainButton: TextButton(
                           onPressed: () {
 
-                            //permissionsScreen
+                            //TODO permissionsScreen
                             
                           },
                           child: const Text('see more details'),
@@ -151,14 +203,12 @@ class BottomNavigationBlogSys extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
-                    controller.colorIcon.value = 3;
-                  },
+                  onPressed: ()=> selectScreen(CurrentScreen.search),
                   icon: Icon(
                     Icons.search_rounded,
                     size: 30,
                     color:
-                        controller.colorIcon.value == 3
+                        selectIndex== 3
                             ? Colors.blue
                             : Colors.black,
                   ),
@@ -174,7 +224,6 @@ class BottomNavigationBlogSys extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }

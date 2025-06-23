@@ -23,7 +23,7 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
     with TickerProviderStateMixin {
   //Controller_Getx
   final controller = Get.find<HomeController>();
-  final logincontroller = Get.find<CheckLoginController>();
+
   bool chengeWidgetLoginIcon = false;
 
   @override
@@ -96,7 +96,7 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
                 children: [
                   InkWell(
                     onTap: () {
-                      if (logincontroller.isLogin.value) {
+                      if (CheckLoginController.isLogin) {
                         Get.toNamed(RoutsName.routeProfileScreen);
                       } else {
                         DrawerAnimationHome.animationController.forward();

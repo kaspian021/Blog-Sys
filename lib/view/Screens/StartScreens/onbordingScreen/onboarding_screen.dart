@@ -7,7 +7,7 @@ import 'package:blog_system_app/model/model_list_content_onbording.dart';
 import 'package:blog_system_app/view/Screens/StartScreens/onbordingScreen/onbording_pages.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -69,7 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
+    
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 244, 247, 255),
@@ -96,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  height: Get.height / 2.9,
+                  height: size.height / 2.9,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
@@ -135,7 +135,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ValueSizes.verylow.height,
                             GestureDetector(
                               onTap: () {
-                                Get.offAndToNamed(RoutsName.routeHomeScreen);
+                                Navigator.pushReplacementNamed(context, RoutsName.routeHomeScreen);
                               },
                               child: Container(
                                 height: 45,

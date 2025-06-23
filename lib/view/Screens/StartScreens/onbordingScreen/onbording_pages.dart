@@ -1,7 +1,6 @@
-
 import 'package:blog_system_app/controller/Animation_controller/onbording_animation_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 
 class OnboardingPage extends StatefulWidget {
@@ -9,10 +8,10 @@ class OnboardingPage extends StatefulWidget {
   final List imageAsset;
   const OnboardingPage({
     super.key,
-
     required this.imageAsset, 
 
   });
+
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
@@ -55,14 +54,14 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   @override
   Widget build(BuildContext context) {
-   
+   final Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        SizedBox(height: Get.height / 7.5),
+        SizedBox(height: size.height / 7.5),
         Center(
           child: Container(
-            height: Get.height / 2.44,
-            width: Get.width / 1.27,
+            height: size.height / 2.44,
+            width: size.width / 1.27,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             child: Column(
               children: [
@@ -71,8 +70,8 @@ class _OnboardingPageState extends State<OnboardingPage>
                     SlideTransition(
                       position: OnbordingAnimationScreen.photoAnimationTopLeft,
                       child: Container(
-                        height: Get.height / 5.1,
-                        width: Get.width / 4,
+                        height: size.height / 5.1,
+                        width: size.width / 4,
                         decoration: BoxDecoration(
                           boxShadow: const [
                             BoxShadow(
@@ -93,8 +92,8 @@ class _OnboardingPageState extends State<OnboardingPage>
                     SlideTransition(
                       position: OnbordingAnimationScreen.photoAnimationTopRight,
                       child: Container(
-                        height: Get.height / 5.1,
-                        width: Get.width / 1.97,
+                        height: size.height / 5.1,
+                        width: size.width / 1.97,
                         decoration: BoxDecoration(
                           boxShadow: const [
                             BoxShadow(
@@ -119,8 +118,8 @@ class _OnboardingPageState extends State<OnboardingPage>
                     SlideTransition(
                       position: OnbordingAnimationScreen.photoAnimationBottomLeft,
                       child: Container(
-                        height: Get.height / 5.1,
-                        width: Get.width / 1.97,
+                        height: size.height / 5.1,
+                        width: size.width / 1.97,
                         decoration: BoxDecoration(
                           boxShadow: const [
                             BoxShadow(
@@ -141,8 +140,8 @@ class _OnboardingPageState extends State<OnboardingPage>
                     SlideTransition(
                       position: OnbordingAnimationScreen.photoAnimationBottomRight,
                       child: Container(
-                        height: Get.height / 5.1,
-                        width: Get.width / 4,
+                        height: size.height / 5.1,
+                        width: size.width / 4,
                         decoration: BoxDecoration(
                           boxShadow: const [
                             BoxShadow(

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LoginController());
     return GetMaterialApp(
-      getPages: Routs.routs,
+      routes: Routs.routesScreen,
       debugShowCheckedModeBanner: false,
       initialRoute: RoutsName.routeSplashScreen,
       

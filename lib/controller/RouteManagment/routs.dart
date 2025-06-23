@@ -1,59 +1,30 @@
-
-import 'package:blog_system_app/controller/bindings.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_screen.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_single_screen.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_write_screen.dart';
-import 'package:blog_system_app/view/Screens/Main_Screens/main_pages.dart';
+import 'package:blog_system_app/view/Screens/Main_Screens/Home/home_page.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/profile_screen.dart';
+import 'package:blog_system_app/view/Screens/StartScreens/onbordingScreen/onboarding_screen.dart';
 import 'package:blog_system_app/view/Screens/StartScreens/splash_screen.dart';
-import 'package:blog_system_app/view/Screens/register&Login/select_register.dart';
+import 'package:blog_system_app/view/Screens/register&Login/login_screen.dart';
 import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-//Screens_for_simple_binding
 
 
 class Routs {
   Routs._();
 
-  static List<GetPage<dynamic>> routs = [
-    GetPage(
-      name: RoutsName.routeLoginScreen,
-      page: () => const SelectRegister(),
-      binding: BindLoginScreen(),
-    ),
-    
-    GetPage(
-      name: RoutsName.routeSplashScreen,
-      page: () => const SplashScreen(),
-      binding: BindLoginScreen(),
-    ),
-    GetPage(
-      name: RoutsName.routeHomeScreen,
-      page: () =>   MainPages(),
-      binding: BindHomeScreen(),
-    ),
-    GetPage(
-      name: RoutsName.routeProfileScreen,
-      page: () =>  ProfileScreen(),
-      binding: BindProfileScreen(),
-    ),
+  static Map<String, Widget Function(BuildContext)> routesScreen = {
 
-  //Articles
-    GetPage(
-      name: RoutsName.routeArticlesList,
-      page: () =>  ArticleScreen(),
-      binding: BindArticleScreen(),
-    ),
-    GetPage(
-      name: RoutsName.routeArticlesSingle,
-      page: () =>  ArticleSingleScreen(),
-      binding: BindArticleScreen(),
-    ),
-    GetPage(
-      name: RoutsName.routeArticlesWrite,
-      page: () =>  const ArticleWriteScreen(),
-      binding: BindArticleScreen(),
-    ),
-  ];
+    RoutsName.routeSplashScreen: (context)=> const SplashScreen(),
+    RoutsName.routeHomeScreen: (context)=>  HomePage(),
+    RoutsName.routeArticlesList: (context)=>  ArticleScreen(),
+    RoutsName.routeArticlesWrite: (context)=> const ArticleWriteScreen(),
+    RoutsName.routeArticlesSingle: (context)=>  ArticleSingleScreen(),
+    RoutsName.routeProfileScreen: (context)=>  ProfileScreen(),
+    RoutsName.routeLoginScreen: (context)=>  const LoginScreen(),
+    RoutsName.routeOnbordingScreen: (context)=>  const OnboardingScreen(),
+    
+
+  };
 }
