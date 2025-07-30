@@ -1,19 +1,16 @@
 import 'package:blog_system_app/component/temps.dart';
-import 'package:blog_system_app/controller/Register/login_controller.dart';
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
    const AppTextField({
     super.key,
-    this.controller= LoginController,
+    
     
     required this.position,
     required this.controllerTextEditing,
     required this.icon,
     required this.onChanged
   });
-
-  final dynamic controller;
   final String position;
   final TextEditingController controllerTextEditing;
   final Widget icon;

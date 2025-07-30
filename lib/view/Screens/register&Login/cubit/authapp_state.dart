@@ -6,6 +6,7 @@ sealed class AuthappState {}
 final class AuthappInitial extends AuthappState {}
 final class ErrorState extends AuthappState {}
 final class LoadingState extends AuthappState {}
+final class LoadedState extends AuthappState{}
 final class SendSmsState extends AuthappState {}
 final class VerifyCodeState extends AuthappState {}
 final class RegisterState extends AuthappState {}

@@ -2,9 +2,9 @@ import 'dart:developer';
 
 
 import 'package:blog_system_app/component/get_names_url.dart';
-import 'package:blog_system_app/component/service.dart';
+import 'package:blog_system_app/service/service.dart';
 import 'package:blog_system_app/model/model_articles_single.dart';
-import 'package:get/get.dart';
+
 
 class ArticleController extends GetxController {
  

@@ -1,6 +1,6 @@
 
 import 'package:blog_system_app/component/elements.dart';
-import 'package:blog_system_app/component/service.dart';
+import 'package:blog_system_app/service/service.dart';
 import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/controller/Main_Screens/Articles/article_controller.dart';

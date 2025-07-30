@@ -3,8 +3,11 @@ import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/component/widget_custom.dart';
 import 'package:blog_system_app/controller/Animation_controller/registerAnimation/login_animation_screen.dart';
-import 'package:blog_system_app/controller/Register/login_controller.dart';
+import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
+import 'package:blog_system_app/service/service.dart';
+import 'package:blog_system_app/view/Screens/register&Login/cubit/authapp_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -18,7 +21,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
-  final controller = Get.find<LoginController>();
+  final TextEditingController textEmailEditingController =
+      TextEditingController();
+  final TextEditingController textPasswordEditingController =
+      TextEditingController();
+  bool isEmailOk = false;
+  bool isPassportOk = false;
+  bool obscureTextBool = true;
+
   @override
   void initState() {
     //animationController
@@ -82,20 +92,20 @@ class _LoginScreenState extends State<LoginScreen>
                       //Email
                       Obx(
                         () => AppTextField(
-                          controller: controller,
-                          controllerTextEditing:
-                              controller.textEmailEditingController,
+                          controllerTextEditing: textEmailEditingController,
                           position: 'Email',
                           icon:
-                              controller.isEmailOk.value
+                              isEmailOk
                                   ? const Icon(Icons.check, color: Colors.green)
                                   : const Icon(Icons.email),
                           onChanged: (value) {
-                            if (value.isEmail) {
-                              controller.isEmailOk.value = true;
-                            } else {
-                              controller.isEmailOk.value = false;
-                            }
+                            setState(() {
+                              if (value.isEmail) {
+                                isEmailOk = true;
+                              } else {
+                                isEmailOk = false;
+                              }
+                            });
                           },
                         ),
                       ),
@@ -103,22 +113,24 @@ class _LoginScreenState extends State<LoginScreen>
                       //password
                       TextField(
                         onChanged: (value) {
-                          if (value.isPassport) {
-                            controller.isPassportOk.value = true;
-                          } else {
-                            controller.isPassportOk.value = false;
-                          }
+                          setState(() {
+                            if (value.isPassport) {
+                              isPassportOk = true;
+                            } else {
+                              isPassportOk = false;
+                            }
+                          });
                         },
 
-                        obscureText: controller.obscureTextBool.value,
+                        obscureText: obscureTextBool,
                         style: LightTextStyleApp.textNamesSmall,
                         cursorHeight: 18,
                         cursorWidth: 1,
                         expands: false,
-                        controller: controller.textPasswordUPEditingController,
+                        controller: textPasswordEditingController,
                         decoration: InputDecoration(
                           icon:
-                              controller.isPassportOk.value
+                              isPassportOk
                                   ? const Icon(Icons.check, color: Colors.green)
                                   : const Icon(Icons.lock),
                           labelStyle:
@@ -131,14 +143,14 @@ class _LoginScreenState extends State<LoginScreen>
 
                           suffixIcon: InkWell(
                             onTap: () {
-                              controller.obscureTextBool.value
-                                  ? controller.obscureTextBool.value = false
-                                  : controller.obscureTextBool.value = true;
+                              setState(() {
+                                obscureTextBool
+                                    ? obscureTextBool = false
+                                    : obscureTextBool = true;
+                              });
                             },
                             child: Text(
-                              controller.obscureTextBool.value
-                                  ? 'show'
-                                  : 'Hide',
+                              obscureTextBool ? 'show' : 'Hide',
                               style:
                                   LightTextStyleApp.textLableandTitleTextStyle,
                             ),
@@ -146,20 +158,38 @@ class _LoginScreenState extends State<LoginScreen>
                         ),
                       ),
                       (ValueSizes.veryhigh + 10).height,
-                      ElevatedButton(
-                        onPressed: () {
-                          if (controller.isEmailOk.value) {
-                            //create_account
-                            controller.signIngFirbaseWithEmailAndPassword();
-                          } else {
-                            Get.snackbar('Error', 'email nothing');
+                      BlocConsumer<AuthappCubit, AuthappState>(
+                        listener: (context, state) {
+                          if(state is SendSmsState){
+                            Navigator.of(context).pushReplacementNamed(RoutsName.routeHomeScreen);
+                            
+                          }else if(state is ErrorState){
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('خطا در ورود به سیستم' )));
                           }
                         },
-                        child: const Text(
-                          'LOGIN',
-                          style:
-                              LightTextStyleApp.textLableandTitleWhiteTextStyle,
-                        ),
+                        builder: (context, state) {
+                          if (state is LoadingState) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return ElevatedButton(
+                            onPressed: () {
+                              BlocProvider.of<AuthappCubit>(
+                                context,
+                              ).sendSmsEmail(
+                                textEmailEditingController.text,
+                                textPasswordEditingController.text,
+                              );
+                            },
+                            child: const Text(
+                              'LOGIN',
+                              style:
+                                  LightTextStyleApp
+                                      .textLableandTitleWhiteTextStyle,
+                            ),
+                          );
+                        },
                       ),
                       (ValueSizes.veryhigh + 20).height,
                       const Row(

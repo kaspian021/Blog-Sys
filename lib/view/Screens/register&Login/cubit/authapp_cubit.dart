@@ -1,25 +1,46 @@
 import 'package:bloc/bloc.dart';
-import 'package:blog_system_app/component/Urls.dart';
+import 'package:blog_system_app/component/elements.dart';
+import 'package:blog_system_app/model/model_result.dart';
+import 'package:blog_system_app/service/Urls.dart';
+import 'package:blog_system_app/service/service.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
 part 'authapp_state.dart';
 
 class AuthappCubit extends Cubit<AuthappState> {
-  AuthappCubit() : super(AuthappInitial());
-  Dio dio= Dio();
-  void sendSms(String mobileNumber)async{
-    emit(LoadingState());
+  AuthappCubit() : super(AuthappInitial()){
 
+    if(WidgetsAndVariableStatic.box.read(SaveToken.token)!=null){
+      emit(LoadedState());
+    }else{
+      emit(LogoutState());
+    }
+
+  }
+  Dio dio= Dio();
+  void sendSmsEmail(String email,String password)async{
+    emit(LoadingState());
+    FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     try {
-      var response= await dio.post(Urls.baseUrl,
-        data: {'mobileNumber':mobileNumber}
-      );
-      if(response.statusCode==201){
-        emit(SendSmsState());
-      }else{
-        emit(ErrorState());
+      final UserCredential userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(
+            email: email.trim(),
+            password: password.trim(),
+          );
+
+      final User? user = userCredential.user;
+
+      if (user != null) {
+        
+        WidgetsAndVariableStatic.box.write(SaveToken.token, user.uid);
+        
+        emit(LoadedState());
+        
       }
+    } on FirebaseAuthException catch (e) {
+      emit(ErrorState());
     } catch (e) {
       emit(ErrorState());
     }

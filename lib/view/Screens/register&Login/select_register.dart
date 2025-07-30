@@ -2,8 +2,6 @@
 import 'package:blog_system_app/component/extension_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
-import 'package:blog_system_app/view/Screens/register&Login/login_screen.dart';
-import 'package:blog_system_app/view/Screens/register&Login/register_screen.dart';
 import 'package:flutter/material.dart';
 
 
