@@ -2,8 +2,7 @@ import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 
 //loading widget for subprocess
@@ -15,13 +14,7 @@ Widget loading() {
   );
 }
 
-class WidgetsAndVariableStatic {
 
-  WidgetsAndVariableStatic._();
-
-  static final box= GetStorage();
-
-}
 
 //like article animation for read Screen in Articles 
 class LikeArticleContainer extends StatefulWidget {
@@ -84,11 +77,14 @@ class _LikeArticleContainerState extends State<LikeArticleContainer>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var width = size.width;
+    var height = size.height;
     return Padding(
       padding: EdgeInsets.only(
         left: widget.sizeBody * 6.3,
         right: widget.sizeBody,
-        top: Get.height / 100,
+        top: height / 100,
         bottom: widget.sizeBody - 7,
       ),
       child: AnimatedBuilder(

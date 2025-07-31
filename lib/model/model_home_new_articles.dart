@@ -1,6 +1,6 @@
 
 
-import 'package:blog_system_app/component/get_names_url.dart';
+import 'package:blog_system_app/service/get_names_url.dart';
 
 class ModelHomeNewArticles {
 

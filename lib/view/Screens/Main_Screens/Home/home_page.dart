@@ -1,17 +1,14 @@
 
 import 'package:blog_system_app/component/elements.dart';
-import 'package:blog_system_app/service/service.dart';
+import 'package:blog_system_app/service/service_tools.dart';
 import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/component/text_style_app.dart';
-import 'package:blog_system_app/controller/Main_Screens/Articles/article_controller.dart';
-import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
-import 'package:blog_system_app/controller/Register/check_login_controller.dart';
+
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 class HomePage extends StatelessWidget {
     HomePage(
@@ -19,16 +16,16 @@ class HomePage extends StatelessWidget {
   );
 
   
-  final HomeController _homeController = Get.put(HomeController());
-  final GetStorage box= WidgetsAndVariableStatic.box; 
 
 
-  final controllerArticleSingle= Get.put(ArticleController());
+
+
 
 
   @override
   Widget build(BuildContext context) {
-    var sizeBody = MediaQuery.of(context).size.width / 12;
+    var size= MediaQuery.of(context).size;
+    var sizeBody= size.width/12;
     return  SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
@@ -37,7 +34,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(
                 sizeBody,
-                Get.height / 20,
+                size.height / 20,
                 sizeBody,
                 10,
               ),

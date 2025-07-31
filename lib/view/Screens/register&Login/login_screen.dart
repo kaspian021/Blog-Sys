@@ -4,11 +4,11 @@ import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/component/widget_custom.dart';
 import 'package:blog_system_app/controller/Animation_controller/registerAnimation/login_animation_screen.dart';
 import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
-import 'package:blog_system_app/service/service.dart';
+import 'package:blog_system_app/service/service_tools.dart';
 import 'package:blog_system_app/view/Screens/register&Login/cubit/authapp_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+
 
 // ignore: must_be_immutable
 
@@ -53,12 +53,13 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Expanded(
       child: SlideTransition(
         position: LoginAnimationScreen.animationContainerLogin,
         child: Container(
           width: double.infinity,
-          height: Get.height / 2.16,
+          height: size.height / 2.16,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -70,8 +71,7 @@ class _LoginScreenState extends State<LoginScreen>
             padding: const EdgeInsets.all(40.0),
             child: AnimatedBuilder(
               builder: (context, widgets) {
-                return Obx(
-                  () => Column(
+                return  Column(
                     children: [
                       const Align(
                         alignment: Alignment.topLeft,
@@ -90,8 +90,7 @@ class _LoginScreenState extends State<LoginScreen>
                       ),
                       (ValueSizes.high + 1).height,
                       //Email
-                      Obx(
-                        () => AppTextField(
+                       AppTextField(
                           controllerTextEditing: textEmailEditingController,
                           position: 'Email',
                           icon:
@@ -108,13 +107,13 @@ class _LoginScreenState extends State<LoginScreen>
                             });
                           },
                         ),
-                      ),
+                      
                       (ValueSizes.veryhigh + 15).height,
                       //password
                       TextField(
                         onChanged: (value) {
                           setState(() {
-                            if (value.isPassport) {
+                            if (value.length >= 10) {
                               isPassportOk = true;
                             } else {
                               isPassportOk = false;
@@ -213,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen>
                         style: LightTextStyleApp.textLableandTitleTextStyle,
                       ),
                     ],
-                  ),
+                  
                 );
               },
               animation: LoginAnimationScreen.animationController,

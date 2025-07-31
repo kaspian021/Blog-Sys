@@ -3,24 +3,21 @@ import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
-import 'package:blog_system_app/controller/Main_Screens/Articles/article_controller.dart';
-import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
+
 import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:blog_system_app/component/extension_app.dart';
 
 class ArticleScreen extends StatelessWidget {
   ArticleScreen({super.key});
 
-  final controller = Get.find<HomeController>();
-  final controllerArticle = Get.find<ArticleController>();
 
   @override
   Widget build(BuildContext context) {
-    var sizeBody = MediaQuery.of(context).size.width / 10;
-
+    var size = MediaQuery.of(context).size;
+    var sizeBody = size.width / 10;
     return SafeArea(
       child: Scaffold(
         
@@ -40,13 +37,13 @@ class ArticleScreen extends StatelessWidget {
               ),
               ValueSizes.veryhigh.height,
               SizedBox(
-                height: Get.height/1.25,
+                height: size.height/1.25,
           
                 child: ListView.builder(
                   itemCount: 10,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    var item= controller.listArticlesNews;
+                    var item= listArticlesNews;
                     return Padding(
                       padding: EdgeInsets.only(
                         left: sizeBody-10,

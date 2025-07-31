@@ -3,12 +3,10 @@ import 'package:blog_system_app/component/extension_app.dart';
 import 'package:blog_system_app/component/text_style_app.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
 import 'package:blog_system_app/controller/Animation_controller/Home_Screen_animation/drawer_animation_home.dart';
-import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
-import 'package:blog_system_app/controller/Register/check_login_controller.dart';
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 class DrawerBlogSys extends StatefulWidget {
   const DrawerBlogSys({super.key});
@@ -83,6 +81,7 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Directionality(
       textDirection: TextDirection.rtl,
 
@@ -153,7 +152,7 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
               SlideTransition(
                 position: DrawerAnimationHome.animationStartWidget,
                 child: Container(
-                  width: Get.width / 2.1,
+                  width: size.width / 2.1,
                   height: 40,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -191,7 +190,7 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
                 child: SlideTransition(
                   position: DrawerAnimationHome.animationStartWidget,
                   child: Container(
-                    width: Get.width / 2.1,
+                    width: size.width / 2.1,
                     height: 40,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -223,7 +222,7 @@ class _DrawerBlogSysState extends State<DrawerBlogSys>
                 child: SlideTransition(
                   position: DrawerAnimationHome.animationStartWidget,
                   child: Container(
-                    width: Get.width / 2.1,
+                    width: size.width / 2.1,
                     height: 40,
                   
                     decoration: BoxDecoration(

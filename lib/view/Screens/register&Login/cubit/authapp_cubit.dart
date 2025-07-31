@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:blog_system_app/component/elements.dart';
 import 'package:blog_system_app/model/model_result.dart';
 import 'package:blog_system_app/service/Urls.dart';
-import 'package:blog_system_app/service/service.dart';
+import 'package:blog_system_app/service/service_tools.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
