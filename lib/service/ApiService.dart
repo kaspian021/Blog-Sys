@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:blog_system_app/model/model_articles_single.dart';
-import 'package:blog_system_app/model/model_home_new_articles.dart';
+import 'package:blog_system_app/model/model_articles.dart';
 import 'package:blog_system_app/model/model_result.dart';
 import 'package:blog_system_app/service/get_names_url.dart';
 import 'package:blog_system_app/service/service_tools.dart';
@@ -23,24 +23,24 @@ class Apiservice {
 
   }
 
-  Future<ModelHomeNewArticles?> showHomeNewArticles() async{
+  Future<ModelArticles?> showHomeNewArticles() async{
 
     try {
-      final String url = 'article';
+      
       final response = await dio.get(url);
       if(response.statusCode == 200){
         for(var item in response.data){
-          return ModelHomeNewArticles.fromJson(item);
+          return ModelArticles.fromJson(item);
         }
         log('showHomeNewArticles: ok data to in Model');
       }else{
         log('showHomeNewArticles: not ok data');
-        return ModelHomeNewArticles(title: '', image: '', view: 0, createdAt: '', author: '', id: '', content: '');
+        return ModelArticles(id: 0, category: '', name: '', writer: '', date: '', desc: '', image_path: '', price: 0, like: 0);
       }
 
     } catch (e) {
       log('showHomeNewArticles: Error: $e');
-      return ModelHomeNewArticles(title: '', image: '', view: 0, createdAt: '', author: '', id: '', content: '');
+      return ModelArticles(id: 0, category: '', name: '', writer: '', date: '', desc: '', image_path: '', price: 0, like: 0);
     }
 
   }
