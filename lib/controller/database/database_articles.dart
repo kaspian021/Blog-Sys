@@ -43,13 +43,13 @@ class DatabaseArticles {
     """;
   }
 
-  Future<List> getArticlesAll()async{
+  Future<List<ModelArticles>> getArticlesAll()async{
     Database db = await database;
 
     final List<Map<String,dynamic>> data = await db.query('dataArticles',orderBy: 'date',);
 
     return List.generate(data.length, (index) {
-      ModelArticles.fromJson(data[index],);
+      return ModelArticles.fromJson(data[index],);
     },growable: false);
   }
 
@@ -59,7 +59,7 @@ class DatabaseArticles {
 
     db.transaction((txn)async {
       
-      await txn.delete('dataArticles',);
+      await txn.delete('dataArticles');
       for(var item in articles){
         await txn.insert('dataArticles', item.toMap(),conflictAlgorithm: ConflictAlgorithm.replace);
       }
@@ -68,7 +68,7 @@ class DatabaseArticles {
 
   }
 
-  Future<ModelArticles> getArticlebyId(int id)async{
+  Future<ModelArticles?> getArticlebyId(int id)async{
     try {
       final Database db = await database;
 
@@ -77,11 +77,23 @@ class DatabaseArticles {
         return ModelArticles.fromJson(data.first);
       }
       log('Error database query: not get return by id');
-      return ModelArticles(id: 0, category: '', name: '', writer: '', date: '', desc: '', image_path: '', price: 0, like: 0);
+      return null;
     } catch (e) {
       log("Error database : $e");
-      return ModelArticles(id: 0, category: '', name: '', writer: '', date: '', desc: '', image_path: '', price: 0, like: 0);
+      return null;
+    }
+  }
 
+  Future<List<ModelArticles>> getArticleBylike()async{
+    final db = await database;
+    try {
+      List<Map<String,dynamic>> data = await db.query('dataArticles',orderBy: 'like');
+      return List.generate(data.length, (index) {
+        return ModelArticles.fromJson(data[index]);
+      },);
+    } catch (e) {
+      log('Error DatabaseArticles: getArticleBylike: $e');
+      return List.empty();
     }
   }
   
