@@ -1,14 +1,12 @@
 
 import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/component/value_sizes.dart';
-import 'package:blog_system_app/controller/Main_Screens/home_controller.dart';
-import 'package:blog_system_app/controller/Register/check_login_controller.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_screen.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Articles/article_write_screen.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Home/drawer_widget.dart';
 import 'package:blog_system_app/view/Screens/Main_Screens/Home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 
 class CurrentScreen {

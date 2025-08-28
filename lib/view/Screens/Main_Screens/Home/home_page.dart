@@ -1,212 +1,251 @@
-
 import 'package:blog_system_app/component/elements.dart';
+import 'package:blog_system_app/controller/config/tools.dart';
+import 'package:blog_system_app/controller/data/HomeData/repo.dart';
+import 'package:blog_system_app/controller/database/shared_preferences.dart';
 import 'package:blog_system_app/service/service_tools.dart';
 import 'package:blog_system_app/component/temps.dart';
 import 'package:blog_system_app/component/text_style_app.dart';
 
 import 'package:blog_system_app/gen/assets.gen.dart';
 import 'package:blog_system_app/controller/RouteManagment/routs_name.dart';
+import 'package:blog_system_app/view/Screens/Main_Screens/Home/bloc/home_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class HomePage extends StatelessWidget {
-    HomePage(
-    {super.key}
-  );
-
-  
-
-
-
-
-
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var size= MediaQuery.of(context).size;
-    var sizeBody= size.width/12;
-    return  SingleChildScrollView(
+    var size = MediaQuery.of(context).size;
+    var sizeBody = size.width / 12;
+    return BlocProvider(
+      create: (context) {
+        final homeBloc = HomeBloc(repo: repoHomeDataOnline);
+
+        homeBloc.add(HomeInit());
+
+        return homeBloc;
+      },
+      child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            //appbar
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                sizeBody,
-                size.height / 20,
-                sizeBody,
-                10,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Hi, ${!CheckLoginController.isLogin ? box.read(SaveToken.userName) : null}',
-                      style: LightTextStyleApp.textLableandTitleTextStyle,
-                    ), //username
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            if(state is LoadedState){
+              return const CircularProgressIndicator(
+                color: Colors.white,
+              );
+
+            }
+            if(state is LoadedState){
+              
+              return Column(
+              children: [
+                //appbar
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    sizeBody,
+                    size.height / 20,
+                    sizeBody,
+                    10,
                   ),
-                  const Icon(Icons.notifications_active_outlined),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            //Top seller relativ to the Articles
-            Padding(
-              padding: EdgeInsets.only(left: sizeBody),
-              child: const Align(
-                alignment: Alignment.topLeft,
-                child: Text("Top Seller's", style: LightTextStyleApp.textTitleLarge),
-              ),
-            ),
-            const SizedBox(height: 10),
-            //list_Sellers
-            SizedBox(
-              height: Get.height / 7.5,
-      
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10, //test
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      left: index == 0 ? sizeBody : 20,
-                      right: index == 9 ? sizeBody : 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Hi, ${ SharedPreferencesApp.instance.getString(SaveToken.userName)}',
+                          style: LightTextStyleApp.textLableandTitleTextStyle,
+                        ), //username
+                      ),
+                      const Icon(Icons.notifications_active_outlined),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                //Top seller relativ to the Articles
+                Padding(
+                  padding: EdgeInsets.only(left: sizeBody),
+                  child: const Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Top Seller's",
+                      style: LightTextStyleApp.textTitleLarge,
                     ),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: Get.width / 5.54,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blue, width: 2),
-      
-                            borderRadius: BorderRadius.circular(22),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              top: Get.height / 160.94,
-                              left: Get.width / 70.94,
-                              bottom: Get.height / 160.94,
-                              right: Get.width / 70.94,
-                            ),
-                            child: Container(
-                              height: Get.height / 11.94,
-                              width: Get.width / 6.94,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                //list_Sellers
+                SizedBox(
+                  height: size.height / 7.5,
+
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10, //test
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          left: index == 0 ? sizeBody : 20,
+                          right: index == 9 ? sizeBody : 0,
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: size.width / 5.54,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(17),
-                                image: DecorationImage(
-                                  image: AssetImage(Assets.images.graphic.path),
-                                  fit: BoxFit.cover,
+                                border: Border.all(
+                                  color: Colors.blue,
+                                  width: 2,
+                                ),
+
+                                borderRadius: BorderRadius.circular(22),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  top: size.height / 160.94,
+                                  left: size.width / 70.94,
+                                  bottom: size.height / 160.94,
+                                  right: size.width / 70.94,
+                                ),
+                                child: Container(
+                                  height: size.height / 11.94,
+                                  width: size.width / 6.94,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(17),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        Assets.images.graphic.path,
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                            const SizedBox(height: 5),
+                            const Text(
+                              'name',
+                              style: LightTextStyleApp.textNamesSmall,
+                            ), //Names Sellers
+                          ],
                         ),
-                        const SizedBox(height: 5),
-                        const Text('name', style: LightTextStyleApp.textNamesSmall), //Names Sellers
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 35),
-            //list subject articles
-            SizedBox(
-              height: Get.height / 2.97,
-      
-              child: ListView.builder(
-                primary: false,
-      
-                itemCount: 5, //test
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      left: index == 0 ? sizeBody : 15,
-                      right: index == 4 ? sizeBody : 10,
-                    ),
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: Get.height / 2.97,
-                          width: Get.width / 1.58,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                              image: AssetImage(Assets.images.motherBoard.path),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          foregroundDecoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: ColorsConst.topSubjectArticles,
-                              begin: Alignment.center,
-                              end: Alignment.bottomCenter,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: Get.width / 2, left: 20),
-                          child: const Text(
-                            'Technology',
-                            style: LightTextStyleApp.textSubjectTextStyle,
-                          ), //Names topSubjectArticles
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 30),
-            //News Articles
-            Padding(
-              padding: EdgeInsets.only(left: sizeBody, right: sizeBody),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Text('Latest News', style: LightTextStyleApp.textSubjectDarkTextStyle),
+                      );
+                    },
                   ),
-                  GestureDetector(
-                    onTap: () => _homeController.colorIcon.value=1,
-                    child: const Text(
-                      'More',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.blue,
-                        fontFamily: 'Avenir',
-                        fontWeight: FontWeight.w700,
+                ),
+                const SizedBox(height: 35),
+                //list subject articles
+                SizedBox(
+                  height: size.height / 2.97,
+
+                  child: ListView.builder(
+                    primary: false,
+
+                    itemCount: 5, //test
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          left: index == 0 ? sizeBody : 15,
+                          right: index == 4 ? sizeBody : 10,
+                        ),
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: size.height / 2.97,
+                              width: size.width / 1.58,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                    Assets.images.motherBoard.path,
+                                  ),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              foregroundDecoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: ColorsConst.topSubjectArticles,
+                                  begin: Alignment.center,
+                                  end: Alignment.bottomCenter,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: size.width / 2,
+                                left: 20,
+                              ),
+                              child: const Text(
+                                'Technology',
+                                style: LightTextStyleApp.textSubjectTextStyle,
+                              ), //Names topSubjectArticles
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 30),
+                //News Articles
+                Padding(
+                  padding: EdgeInsets.only(left: sizeBody, right: sizeBody),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: Text(
+                          'Latest News',
+                          style: LightTextStyleApp.textSubjectDarkTextStyle,
+                        ),
                       ),
-                    ),
+                      GestureDetector(
+                        onTap: () => _homeController.colorIcon.value = 1,
+                        child: const Text(
+                          'More',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.blue,
+                            fontFamily: 'Avenir',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-            //list_News_Articles
-            Obx(
-              () =>
-                  !_homeController.isloading.value
-                      ? Column(
-                        children:
-                            _homeController.listArticlesTopVisited
-                                .map(
-                                  (f) =>
-                                      _buildArticleItem(f, sizeBody),
-                                ) //list_neverScroller with Column
-                                .toList(),
-                      )
-                      : loading(),
-            ),
-          ],
+                ),
+                const SizedBox(height: 30),
+                //list_News_Articles
+                
+                  
+                Column(
+                  children:
+                    
+                    state.repo.productsBest.allProduct.map(
+                      (f) => _buildArticleItem(f, sizeBody),
+                    ) //list_neverScroller with Column
+                    .toList(),
+                ),
+                      
+                
+              ],
+            );
+            }
+            if(state is ErrorState){
+              return const Text('Error state');
+            }
+            
+          },
+          
         ),
-    
+      ),
     );
   }
-  
+
   //Articles_New
   Widget _buildArticleItem(article, sizeBody) {
     return Padding(
@@ -220,9 +259,12 @@ class HomePage extends StatelessWidget {
             !_homeController.isloading.value
                 ? GestureDetector(
                   onTap: () {
-                      //id send article with arguament Articles Single
-                      controllerArticleSingle.showArticleSingle(article.id);
-                      Get.toNamed(RoutsName.routeArticlesSingle,arguments: article);
+                    //id send article with arguament Articles Single
+                    controllerArticleSingle.showArticleSingle(article.id);
+                    Get.toNamed(
+                      RoutsName.routeArticlesSingle,
+                      arguments: article,
+                    );
                   },
                   child: Stack(
                     children: [
@@ -234,7 +276,7 @@ class HomePage extends StatelessWidget {
                           boxShadow: const [
                             BoxShadow(blurRadius: 10.0, color: Colors.black12),
                           ],
-                  
+
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
@@ -264,12 +306,13 @@ class HomePage extends StatelessWidget {
                             const SizedBox(height: 50),
                             SizedBox(
                               width: Get.width / 2.2,
-                  
+
                               child: RichText(
                                 text: TextSpan(
                                   text: article.title,
-                  
-                                  style: LightTextStyleApp.titleArticleTextStyle
+
+                                  style:
+                                      LightTextStyleApp.titleArticleTextStyle,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,

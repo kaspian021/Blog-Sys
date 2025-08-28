@@ -27,7 +27,7 @@ class SharedPreferencesApp {
     final shared= await init;
 
     try {
-      String? result_key = await shared?.getString(key);
+      String? result_key =  shared?.getString(key);
     if(result_key!=null){
       return result_key;
     }

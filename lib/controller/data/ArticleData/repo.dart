@@ -1,4 +1,4 @@
-import 'package:blog_system_app/controller/config/src.dart';
+import 'package:blog_system_app/controller/data/ArticleData/src.dart';
 import 'package:blog_system_app/model/model_articles.dart';
 
 abstract class IRepozitory{
